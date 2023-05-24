@@ -1,0 +1,12 @@
+{
+  "connectionError": "There is something wrong with your connection , try again later",
+  "noDataError": "There is no available data",
+  "generalError": "Something went wrong , Please try again later",
+  "unAuthorizedError": "",
+  "noData": "There is no available data",
+  "noConnection": "There is no Internet connection",
+  "tryAgain": "Please try again later",
+  "emptyEmail": "Please enter an email",
+  "emptyPassword": "Please enter an password",
+  "invalidEmail": "Please enter a valid email"
+}
