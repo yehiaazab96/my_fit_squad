@@ -8,38 +8,43 @@ class UserViewModel extends StateNotifier<User?> with BaseViewModel {
 
   UserViewModel(
     this._userRepositoryImpl,
-  ) : super(null);
+  ) : super(null) {
+    // signout();
+    getLocalUserProfile();
+  }
 
   Future<User?> getLocalUserProfile() async {
     User? userData = await _userRepositoryImpl.getLocalUserProfile();
     state = userData;
-
     print(state?.accessToken);
     return state;
   }
 
+  Future<User?> login(String email, String password) async {
+    var userData = await _userRepositoryImpl.login(email, password);
+    if (userData.data != null) {
+      state = userData.data;
+      print(state?.accessToken);
+      return state;
+    }
+    return null;
+  }
+
   void setLocalUserProfile(User? user) {
     _userRepositoryImpl.setLocalUserProfile(user);
-
     state = user;
   }
 
   Future signout() async {
     resetUserState();
     setLocalUserProfile(User());
-
-    // navigateToScreen((context) => LoginScreen(), removeTop: true);
   }
 
   void setState(User? user) {
-    // state = user;
     setLocalUserProfile(user);
   }
 
   void resetUserState() {
     state = User();
-    // Constants.navigatorKey.currentContext!
-    //     .read(di.selectedNavigationItemTypeProvider)
-    //     .state = BottomNavigationItemType.bookings;
   }
 }

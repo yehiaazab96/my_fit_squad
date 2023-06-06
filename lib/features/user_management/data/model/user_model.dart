@@ -7,7 +7,6 @@ class User {
   String? birthDay;
   String? accessToken;
   String? refreshToken;
-  var staffId;
   User({
     this.userId,
     this.firstName,
@@ -26,22 +25,20 @@ class User {
     email = json['email'];
     birthDay = json['birthday'];
     displayName = json['display_name'];
-    accessToken = json['access_token'];
+    accessToken = json['token'];
     refreshToken = json['refresh_token'];
-    staffId = json['staff_id'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.userId;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['email'] = this.email;
-    data['display_name'] = this.displayName;
-    data['birthday'] = this.birthDay;
-    data['access_token'] = this.accessToken;
-    data['refresh_token'] = this.refreshToken;
-    data['staff_id'] = this.staffId;
+    final Map<String, dynamic> data = {};
+    data['id'] = userId;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['email'] = email;
+    data['display_name'] = displayName;
+    data['birthday'] = birthDay;
+    data['token'] = accessToken;
+    data['refresh_token'] = refreshToken;
     return data;
   }
 
@@ -65,6 +62,5 @@ class User {
     this.birthDay = birthDay ?? this.birthDay;
     this.accessToken = accessToken ?? this.accessToken;
     this.refreshToken = refreshToken ?? this.refreshToken;
-    this.staffId = staffId ?? this.staffId;
   }
 }

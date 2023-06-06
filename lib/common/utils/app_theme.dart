@@ -5,19 +5,21 @@ import 'package:flutter/material.dart';
 ThemeData appTheme(BuildContext context) {
   // ScreenUtil().setSp(50);
   ThemeData themeData = ThemeData(
-      fontFamily: FontFamily.inter,
+      fontFamily: FontFamily.roboto,
       useMaterial3: true,
       canvasColor: AppColors.black,
-      colorScheme: ColorScheme.fromSeed(
-        brightness: Brightness.dark,
-        seedColor: AppColors.primaryGrey,
-        secondary: AppColors.orange,
-      ),
+      colorScheme: colorScheme,
       appBarTheme: AppBarTheme(
           color: AppColors.primaryGrey, foregroundColor: AppColors.orange));
 
   return themeData;
 }
+
+ColorScheme colorScheme = ColorScheme.fromSeed(
+  brightness: Brightness.dark,
+  seedColor: AppColors.primaryGrey,
+  secondary: AppColors.orange,
+);
 
 ButtonStyle elevatedButtonStyle(BuildContext context,
     {EdgeInsetsDirectional? padding,

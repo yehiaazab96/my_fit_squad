@@ -22,6 +22,10 @@ class $AssetsImagesGen {
   AssetGenImage get gearloading =>
       const AssetGenImage('assets/images/gearloading.png');
 
+  /// File path: assets/images/login_bg.jpg
+  AssetGenImage get loginBg =>
+      const AssetGenImage('assets/images/login_bg.jpg');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -34,13 +38,27 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [avatar, check, gearloading, logo, placeholder, side];
+      [avatar, check, gearloading, loginBg, logo, placeholder, side];
+}
+
+class $AssetsTranslationsGen {
+  const $AssetsTranslationsGen();
+
+  /// File path: assets/translations/ar.json
+  String get ar => 'assets/translations/ar.json';
+
+  /// File path: assets/translations/en.json
+  String get en => 'assets/translations/en.json';
+
+  /// List of all assets
+  List<String> get values => [ar, en];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }
 
 class AssetGenImage {

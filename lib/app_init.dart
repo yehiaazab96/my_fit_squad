@@ -19,7 +19,7 @@ class AppInit {
   }
 
   void initAfterAppLaunching() {
-    Future.delayed(Duration.zero, () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       ProviderScope.containerOf(Constants.navigatorKey.currentContext!)
           .read(di.isConnectedProvider.notifier)
           .listenToNetworkChanges();

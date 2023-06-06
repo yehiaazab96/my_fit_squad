@@ -25,9 +25,13 @@ mixin BaseViewModel {
         SnackBar(
           content: Text(
             message,
+            style: Theme.of(Constants.navigatorKey.currentContext!)
+                .textTheme
+                .labelMedium,
           ),
-          backgroundColor:
-              Theme.of(Constants.navigatorKey.currentContext!).primaryColor,
+          backgroundColor: Theme.of(Constants.navigatorKey.currentContext!)
+              .colorScheme
+              .inversePrimary,
         ),
       );
     }

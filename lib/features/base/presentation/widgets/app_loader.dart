@@ -9,25 +9,23 @@ class AppLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Expanded(
-      child: Container(
-        // width: 100.w,
-        // height: 95.h,
-        color: Theme.of(context).colorScheme.inversePrimary,
-        child: Center(
-          child: Container(
-              width: 10.w,
-              height: 10.w,
-              // padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3.w),
-                  color: Colors.white),
-              child: SpinKitWaveSpinner(
-                color: Theme.of(context).colorScheme.primary,
-                waveColor: Theme.of(context).colorScheme.primary,
-                // curve: Curves.ease,
-              )),
-        ),
+    return Container(
+      width: 100.w,
+      height: 100.h,
+      color: Theme.of(context).colorScheme.inversePrimary,
+      child: Center(
+        child: Container(
+            width: 20.w,
+            height: 20.w,
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3.w),
+                color: Colors.white.withOpacity(.6)),
+            child: SpinKitWaveSpinner(
+              color: Theme.of(context).colorScheme.inversePrimary,
+              waveColor: Theme.of(context).colorScheme.inversePrimary,
+              // curve: Curves.ease,
+            )),
       ),
     );
   }

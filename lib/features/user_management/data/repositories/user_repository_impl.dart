@@ -13,6 +13,10 @@ class UserRepositoryImpl {
     return await networkDataSource.getUserRemoteProfile(id);
   }
 
+  Future<BaseApiResult<User>> login(String email, String password) async {
+    return await networkDataSource.login(email, password);
+  }
+
   Future<void> setLocalUserProfile(User? userData) async {
     if (userData != null) {
       localeDataSource.saveUser(userData);

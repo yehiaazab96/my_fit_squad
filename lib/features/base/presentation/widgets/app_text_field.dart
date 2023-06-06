@@ -33,6 +33,7 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: margin,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,39 +55,40 @@ class AppTextField extends StatelessWidget {
               contentPadding: contentPadding ??
                   const EdgeInsetsDirectional.only(
                       top: 15, bottom: 15, start: 30, end: 30),
-              labelStyle: Theme.of(context).textTheme.subtitle2,
-              hintStyle: Theme.of(context).textTheme.subtitle2?.copyWith( color: Theme.of(context).hintColor,),
+              labelStyle: Theme.of(context).textTheme.labelLarge,
+              hintStyle: Theme.of(context).textTheme.labelLarge,
               border: InputBorder.none,
               enabledBorder: OutlineInputBorder(
-                  borderSide:  BorderSide(color: Theme.of(context).focusColor),
+                  borderSide: BorderSide(color: Theme.of(context).focusColor),
                   borderRadius: BorderRadius.circular(0),
                   gapPadding: 7),
               focusedBorder: OutlineInputBorder(
-                borderSide:  BorderSide(color: Theme.of(context).focusColor),
+                borderSide: BorderSide(color: Theme.of(context).focusColor),
                 borderRadius: BorderRadius.circular(0),
                 gapPadding: 7,
               ),
               errorBorder: OutlineInputBorder(
-                borderSide:  BorderSide(color:Theme.of(context).errorColor),
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.error),
                 borderRadius: BorderRadius.circular(0),
                 gapPadding: 7,
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide:  BorderSide(color:Theme.of(context).errorColor),
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.error),
                 borderRadius: BorderRadius.circular(0),
                 gapPadding: 7,
               ),
-              errorText:errorText ,
+              errorText: errorText,
               errorStyle: const TextStyle(fontSize: 0, letterSpacing: 0),
               prefixIconColor: Theme.of(context).primaryColor,
               suffixIconColor: Theme.of(context).primaryColor,
             ),
             obscureText: isSecured,
-          cursorColor: Theme.of(context).primaryColor,
+            cursorColor: Theme.of(context).primaryColor,
           ),
         ],
       ),
-      margin: margin,
     );
   }
 }

@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:my_fit_squad/app_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_fit_squad/common/utils/app_locales.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'app.dart';
 import 'common/injection/injection_container.dart' as di;
 
@@ -16,9 +16,9 @@ void main() async {
           .overrideWithValue(await SharedPreferences.getInstance())
     ],
     child: EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ar')],
+        supportedLocales: [...AppLocales.values.map((e) => e.locale).toList()],
         path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
+        fallbackLocale: AppLocales.english.locale,
         child: MyFitSquad()),
   ));
 }

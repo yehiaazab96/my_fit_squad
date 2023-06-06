@@ -1,19 +1,18 @@
-
 import 'default_wp_error_data.dart';
 
-class DefaultWPErrorResponse {
+class DefaultErrorResponse {
   final String? code;
-  final String? message;
+  final String? error;
   final DefaultWPErrorData? data;
 
-  DefaultWPErrorResponse({this.code, this.message, this.data});
+  DefaultErrorResponse({this.code, this.error, this.data});
 
-  factory DefaultWPErrorResponse.fromJson(Map<String, dynamic> json) {
-
-    return DefaultWPErrorResponse(
-      code: json['code'],
-      message: json['message'],
-      data: json['data'] == null ? null : DefaultWPErrorData.fromJson(json['data'])
-    );
+  factory DefaultErrorResponse.fromJson(Map<String, dynamic> json) {
+    return DefaultErrorResponse(
+        code: json['code'],
+        error: json['error'],
+        data: json['data'] == null
+            ? null
+            : DefaultWPErrorData.fromJson(json['data']));
   }
 }

@@ -1,20 +1,19 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:my_fit_squad/common/api/api_error_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../injection/injection_container.dart' as di;
-
+import 'package:flutter/foundation.dart' show kIsWeb;
 import '../constants/constants.dart';
 import 'api_urls.dart';
 
 const String doNotInterceptKey = "do_not_intercept";
 const String authorizationRequired = "authorization_required";
-const String wpApiKey = "WP_API";
 
 class ApiConfig {
   static Dio dio = createDio();
+
   static final Dio _refreshDio = Dio(BaseOptions(
       connectTimeout: 10000, receiveTimeout: 10000, baseUrl: ApiUrls.baseUrl));
 
@@ -25,9 +24,11 @@ class ApiConfig {
   ));
 
   static Dio createDio() {
-    return Dio(BaseOptions(
+    var dio = Dio(BaseOptions(
         connectTimeout: 10000, receiveTimeout: 10000, baseUrl: ApiUrls.baseUrl))
       ..interceptors.addAll([AppInterceptor(), dioCacheManager.interceptor]);
+    // if (kIsWeb) {}
+    return dio;
   }
 }
 

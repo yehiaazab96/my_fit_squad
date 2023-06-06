@@ -22,6 +22,7 @@ class ApiMethods<T> {
       print(response.toString());
       return _handleResponse(response);
     } on DioError catch (error) {
+      print(error);
       return _catchError<T>(error);
     }
   }
@@ -40,7 +41,6 @@ class ApiMethods<T> {
       print(response.toString());
       return _handleResponseList(response);
     } on DioError catch (error) {
-      print(error);
       return _catchError<List<T>>(error);
     }
   }
@@ -147,9 +147,14 @@ class ApiMethods<T> {
       {bool cache = false, bool hasToken = true, bool isWPApi = false}) {
     Map<String, dynamic> extras = {};
     extras[authorizationRequired] = hasToken;
-    extras[wpApiKey] = isWPApi;
     var options = Options(
-        extra: extras, headers: hasToken ? {'Authorization': 'token'} : {});
+        extra: extras,
+        headers: hasToken
+            ? {
+                'Authorization':
+                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2RmMTYzNThkNzEwNDdmYzRkZjZkYzYiLCJpYXQiOjE2ODUyMDg2NDgsImV4cCI6MTY4NTQ2Nzg0OH0.cjm8yjLH2NOJxJnxpZGNf-r3qjrXIOFDNnGNkIkgimk'
+              }
+            : {});
     return cache
         ? buildCacheOptions(const Duration(minutes: 3),
             maxStale: const Duration(minutes: 7),
@@ -209,27 +214,27 @@ class ApiMethods<T> {
     if (responseData == null) {
       return BaseApiResult<E>(errorType: ApiErrorType.generalError);
     } else if ((responseData is Map<String, dynamic>)) {
-      DefaultWPErrorResponse baseResponse =
-          DefaultWPErrorResponse.fromJson(responseData);
+      DefaultErrorResponse baseResponse =
+          DefaultErrorResponse.fromJson(responseData);
       print(dioError.response?.statusCode.toString());
       switch (dioError.response?.statusCode) {
         case unauthorizedError:
-          print(baseResponse.message);
+          print(baseResponse.error);
           return BaseApiResult<E>(
               errorType: ApiErrorType.unauthorizedError,
-              errorMessage: baseResponse.message,
+              errorMessage: baseResponse.error,
               apiErrors: baseResponse);
         case validationError:
           return BaseApiResult<E>(
               errorType: ApiErrorType.validationError,
-              errorMessage: baseResponse.message,
+              errorMessage: baseResponse.error,
               apiErrors: baseResponse);
         case notFound:
           return BaseApiResult<E>(
-              errorMessage: baseResponse.message, apiErrors: baseResponse);
+              errorMessage: baseResponse.error, apiErrors: baseResponse);
         case badRequestError:
           return BaseApiResult<E>(
-              errorMessage: baseResponse.message, apiErrors: baseResponse);
+              errorMessage: baseResponse.error, apiErrors: baseResponse);
         case serverError:
           return BaseApiResult<E>(errorType: ApiErrorType.generalError);
         default:

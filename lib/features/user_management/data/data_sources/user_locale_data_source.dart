@@ -5,8 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const _CACHED_USER = 'user';
 
-const _firebaseToken = 'firebaseToken';
-
 class UserLocaleDataSource {
   SharedPreferences preferences;
 

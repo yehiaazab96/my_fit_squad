@@ -8,7 +8,7 @@ class AppTextFieldErrorText extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       // margin: EdgeInsets.symmetric(horizontal: 15.w),
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           color: Theme.of(context).highlightColor,
@@ -18,7 +18,7 @@ class AppTextFieldErrorText extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8))),
       child: Text(
         errorText ?? "",
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
     );
   }

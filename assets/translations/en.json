@@ -8,5 +8,12 @@
   "tryAgain": "Please try again later",
   "emptyEmail": "Please enter an email",
   "emptyPassword": "Please enter an password",
-  "invalidEmail": "Please enter a valid email"
+  "invalidEmail": "Please enter a valid email",
+  "myFitSquad": "My Fit Squad",
+  "log_to_account": "Log to your account",
+  "forgot_password": "Forgot Password",
+  "sign_in": "Sign In",
+  "email": "Email",
+  "password": "Password",
+  "confirm_password": "Confirm Password"
 }
