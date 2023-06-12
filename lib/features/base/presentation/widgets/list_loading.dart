@@ -15,21 +15,21 @@ class LoadingList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var listCount = MediaQuery.of(context).size.height / childHeight;
-    return Expanded(
-      child: Container(
-        padding: padding,
-        // color: Colors.white,
-        child: Shimmer.fromColors(
-            baseColor: Theme.of(context).colorScheme.inversePrimary,
-            highlightColor: AppColors
-                .black, //Theme.of(context).colorScheme.secondary.withOpacity(.3),
-            enabled: enabled ?? false,
-            child: ListView.builder(
-              itemBuilder: (_, __) => child,
-              itemCount: listCount.floor(),
-            )),
-      ),
+    // var listCount = 100.h / childHeight;
+    return Container(
+      padding: padding,
+      height: childHeight,
+      // color: Colors.white,
+      child: Shimmer.fromColors(
+          baseColor: Theme.of(context).colorScheme.inversePrimary,
+          highlightColor: Theme.of(context)
+              .colorScheme
+              .inverseSurface, //Theme.of(context).colorScheme.secondary.withOpacity(.3),
+          enabled: enabled ?? false,
+          child: ListView.builder(
+            itemBuilder: (_, __) => child,
+            // itemCount: listCount.floor(),
+          )),
     );
   }
 }

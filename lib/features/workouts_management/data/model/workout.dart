@@ -10,6 +10,7 @@ class Workout {
   WorkoutCategory? category;
   String? description;
   MuscleGroup? muscleGroup;
+
   Workout({
     this.id,
     this.title,

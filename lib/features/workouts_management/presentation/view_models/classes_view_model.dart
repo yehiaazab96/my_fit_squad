@@ -3,27 +3,26 @@ import 'package:my_fit_squad/common/api/api_error_type.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_state.dart';
 import 'package:my_fit_squad/features/base/presentation/view_models/base_view_model.dart';
-import 'package:my_fit_squad/features/workouts_management/data/model/workout.dart';
+import 'package:my_fit_squad/features/workouts_management/data/model/class.dart';
 import 'package:my_fit_squad/features/workouts_management/data/repositories/workout_repository_impl.dart';
-import 'package:my_fit_squad/features/workouts_management/helpers/workout_category.dart';
-import 'package:my_fit_squad/features/workouts_management/presentation/global_states/workouts_state.dart';
+import 'package:my_fit_squad/features/workouts_management/presentation/global_states/classes_state.dart';
 
-class WorkoutsViewModel extends StateNotifier<BaseState<WorkoutsState>>
+class ClassesViewModel extends StateNotifier<BaseState<ClassesState>>
     with BaseViewModel {
   final WorkoutRepositoryImpl _workoutsRepositoryImpl;
 
-  WorkoutsViewModel(this._workoutsRepositoryImpl)
-      : super(BaseState(data: WorkoutsState()));
+  ClassesViewModel(this._workoutsRepositoryImpl)
+      : super(BaseState(data: ClassesState()));
 
-  getWorkouts({WorkoutCategory? category}) async {
+  getClasses() async {
     hideKeyboard();
 
     state = state.copyWith(isLoading: true);
-    BaseApiResult<List<Workout>> result =
-        await _workoutsRepositoryImpl.getWorkouts(category: category);
+    BaseApiResult<List<Class>> result =
+        await _workoutsRepositoryImpl.getClasses();
     if (result.data != null) {
       print(result.data);
-      state = state.copyWith(data: state.data.copyWith(workouts: result.data));
+      state = state.copyWith(data: state.data.copyWith(classes: result.data));
     } else {
       if (result.apiErrors != null) {
         showToastMessage(result.errorMessage ?? "Something went wrong");

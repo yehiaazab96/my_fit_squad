@@ -47,6 +47,8 @@ dependencies:
   animated_bottom_navigation_bar: ^1.2.0
   easy_sidemenu: ^0.4.1
   flutter_animate: ^4.1.1+1
+  google_fonts: ^5.0.0
+
 
 dev_dependencies:
   flutter_test:

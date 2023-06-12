@@ -12,6 +12,22 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Athelete.jpeg
+  AssetGenImage get athelete =>
+      const AssetGenImage('assets/images/Athelete.jpeg');
+
+  /// File path: assets/images/Fat Loss.jpeg
+  AssetGenImage get fatLoss =>
+      const AssetGenImage('assets/images/Fat Loss.jpeg');
+
+  /// File path: assets/images/Muscle Gain.jpeg
+  AssetGenImage get muscleGain =>
+      const AssetGenImage('assets/images/Muscle Gain.jpeg');
+
+  /// File path: assets/images/Rehabilitation.jpeg
+  AssetGenImage get rehabilitation =>
+      const AssetGenImage('assets/images/Rehabilitation.jpeg');
+
   /// File path: assets/images/avatar.png
   AssetGenImage get avatar => const AssetGenImage('assets/images/avatar.png');
 
@@ -37,8 +53,19 @@ class $AssetsImagesGen {
   AssetGenImage get side => const AssetGenImage('assets/images/side.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [avatar, check, gearloading, loginBg, logo, placeholder, side];
+  List<AssetGenImage> get values => [
+        athelete,
+        fatLoss,
+        muscleGain,
+        rehabilitation,
+        avatar,
+        check,
+        gearloading,
+        loginBg,
+        logo,
+        placeholder,
+        side
+      ];
 }
 
 class $AssetsTranslationsGen {

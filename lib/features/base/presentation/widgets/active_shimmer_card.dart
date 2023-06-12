@@ -8,11 +8,11 @@ class MyShimmerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin:
-            EdgeInsetsDirectional.only(start: 0, end: 0, top: 2.h, bottom: 2.h),
+        margin: EdgeInsetsDirectional.fromSTEB(3.w, 0.5.h, 3.w, 0.5.h),
+        height: 20.h,
         decoration: BoxDecoration(
           // color: Colors.white,
-          borderRadius: BorderRadius.circular(4.h),
+          borderRadius: BorderRadius.circular(3.w),
           border: Border.all(
               color: Theme.of(context).colorScheme.primary, width: 0.1.w),
         ),
@@ -30,64 +30,25 @@ class MyShimmerCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadiusDirectional.only(
-                      topStart: Radius.circular(4.h),
-                      bottomEnd: Radius.circular(4.h)),
+                      topStart: Radius.circular(3.w),
+                      bottomEnd: Radius.circular(3.w)),
                   color: Theme.of(context).colorScheme.inversePrimary,
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      color: Colors.transparent,
-                      width: 10.w,
-                      height: 5.h,
-                    ),
-                  ],
+                child: Container(
+                  color: Colors.transparent,
+                  width: 50.w,
+                  height: 7.h,
                 ),
               ),
             ],
           ),
-          Row(
-            children: [
-              Expanded(
-                child: ShimmerText(
-                  height: 3.h,
-                  margin: EdgeInsetsDirectional.only(
-                      start: 1.w, top: 1.h, end: 1.w),
-                ),
-              ),
-              ShimmerText(
-                height: 3.h,
-                width: 10.w,
-                margin:
-                    EdgeInsetsDirectional.only(start: 1.w, top: 1.h, end: 1.w),
-              ),
-            ],
+          ShimmerText(
+            height: 3.h,
+            margin: EdgeInsetsDirectional.only(start: 2.w, top: 1.h, end: 2.w),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: ShimmerText(
-                  height: 3.h,
-                  width: 10.w,
-                  margin: EdgeInsetsDirectional.only(
-                      start: 1.w, top: 1.h, end: 1.w),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 1.h),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                    child: ShimmerText(
-                  height: 3.h,
-                  width: 10.w,
-                  margin: EdgeInsets.symmetric(horizontal: 1.w),
-                )),
-              ],
-            ),
+          ShimmerText(
+            height: 3.h,
+            margin: EdgeInsetsDirectional.only(start: 2.w, top: 1.h, end: 2.w),
           )
         ]));
   }

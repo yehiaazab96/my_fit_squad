@@ -27,6 +27,24 @@ class ApiMethods<T> {
     }
   }
 
+  // Future<List> basicGetList(String url,
+  //     {Map<String, dynamic>? params,
+  //     bool hasToken = true,
+  //     bool cache = false,
+  //     bool isWPApi = true}) async {
+  //   try {
+  //     Response response = await ApiConfig.dio.get(url,
+  //         queryParameters: params,
+  //         options:
+  //             getOptions(cache: cache, hasToken: hasToken, isWPApi: isWPApi));
+  //     print(response.toString());
+  //     return _handleResponse(response);
+  //   } on DioError catch (error) {
+  //     print(error);
+  //     return _catchError<T>(error);
+  //   }
+  // }
+
   Future<BaseApiResult<List<T>>> getList(String url,
       {Map<String, dynamic>? params,
       bool hasToken = true,
