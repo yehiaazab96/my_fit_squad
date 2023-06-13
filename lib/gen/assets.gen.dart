@@ -34,6 +34,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/check.png
   AssetGenImage get check => const AssetGenImage('assets/images/check.png');
 
+  /// File path: assets/images/chest.png
+  AssetGenImage get chest => const AssetGenImage('assets/images/chest.png');
+
   /// File path: assets/images/gearloading.png
   AssetGenImage get gearloading =>
       const AssetGenImage('assets/images/gearloading.png');
@@ -60,6 +63,7 @@ class $AssetsImagesGen {
         rehabilitation,
         avatar,
         check,
+        chest,
         gearloading,
         loginBg,
         logo,

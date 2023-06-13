@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_fit_squad/common/api/api_urls.dart';
+import 'package:my_fit_squad/common/injection/injection_container.dart';
+import 'package:my_fit_squad/features/base/presentation/widgets/app_network_image.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/workout.dart';
-import 'package:my_fit_squad/gen/assets.gen.dart';
+import 'package:my_fit_squad/features/workouts_management/presentation/screens/workout_details_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WorkoutWidget extends StatelessWidget {
@@ -12,8 +14,15 @@ class WorkoutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('${workout?.image ?? ''}');
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Future.delayed(0.seconds, () {
+          ProviderScope.containerOf(context)
+              .read(workoutScreenViewModelProvider.notifier)
+              .navigateTo(WorkoutDetailsScreen.routeName, arguments: workout);
+        });
+      },
       child: Container(
         margin: EdgeInsetsDirectional.fromSTEB(3.w, 0.5.h, 3.w, 0.5.h),
         height: 20.h,
@@ -27,24 +36,10 @@ class WorkoutWidget extends StatelessWidget {
         child: Stack(
           children: [
             Positioned.fill(
-              child: Image.network(
-                '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${workout?.image ?? ''}',
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-                  return SpinKitWaveSpinner(
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    waveColor: Theme.of(context).colorScheme.inversePrimary,
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return Assets.images.loginBg.image(fit: BoxFit.cover);
-                },
-                opacity: const AlwaysStoppedAnimation(0.85),
-              ),
-            ),
+                child: AppNetworkImage(
+              url:
+                  '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${workout?.image ?? ''}',
+            )),
             Positioned(
                 bottom: 0,
                 left: 0,

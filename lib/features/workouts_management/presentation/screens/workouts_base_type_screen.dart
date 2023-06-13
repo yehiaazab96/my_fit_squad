@@ -4,6 +4,8 @@ import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class WorkoutsBaseScreenTypeScreen extends StatelessWidget {
+  static const routeName = './workout_base_screen';
+
   const WorkoutsBaseScreenTypeScreen({super.key});
 
   @override

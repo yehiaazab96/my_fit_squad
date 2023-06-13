@@ -19,10 +19,7 @@ class BaseScreen extends StatelessWidget {
         return Scaffold(
             appBar: Device.width < 800
                 ? AppBar(
-                    leading: AppLogo(
-                      margin:
-                          EdgeInsetsDirectional.only(start: 3.w, bottom: 1.h),
-                    ),
+                    leading: item.leadingWidget,
                     bottom: item.appBarBottomWidget,
                   )
                 : null,

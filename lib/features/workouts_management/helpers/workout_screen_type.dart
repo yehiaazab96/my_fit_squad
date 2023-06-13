@@ -6,7 +6,8 @@ import 'package:my_fit_squad/features/workouts_management/presentation/screens/w
 enum WorkoutScreenType {
   workouts,
   classes,
-  programs;
+  programs,
+  other;
 
   String get title {
     switch (this) {

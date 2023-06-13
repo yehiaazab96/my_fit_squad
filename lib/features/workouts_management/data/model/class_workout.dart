@@ -15,8 +15,8 @@ class ClassWorkout {
     repeat = json['repeat'];
     restTime = json['rest_time'];
 
-    type = (json['type'] != null)
-        ? WorkoutType.getWorkoutType(json['type'])
+    type = (json['workout_type'] != null)
+        ? WorkoutType.getWorkoutType(json['workout_type'])
         : null;
     workout = Workout.fromJson(json['workout']);
   }

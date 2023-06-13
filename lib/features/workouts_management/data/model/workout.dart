@@ -6,6 +6,8 @@ class Workout {
   String? title;
   bool? underReview;
   String? image;
+  String? equipment;
+
   List<String>? workoutsMedia;
   WorkoutCategory? category;
   String? description;
@@ -19,6 +21,7 @@ class Workout {
     this.workoutsMedia,
     this.category,
     this.description,
+    this.equipment,
     this.muscleGroup,
   });
 
@@ -27,6 +30,7 @@ class Workout {
     title = json['title'];
     underReview = json['under_review'];
     image = json['image'];
+    equipment = json['equipment'];
     workoutsMedia = json['workouts_media'] is List
         ? (json['workouts_media'] as List).map((e) => e.toString()).toList()
         : null;
@@ -44,6 +48,7 @@ class Workout {
       String? title,
       bool? underReview,
       String? image,
+      String? equipment,
       List<String>? workoutsMedia,
       WorkoutCategory? category,
       String? description,
@@ -54,6 +59,7 @@ class Workout {
     this.image = image ?? this.image;
     this.workoutsMedia = workoutsMedia ?? this.workoutsMedia;
     this.category = category ?? this.category;
+    this.equipment = equipment ?? this.equipment;
     this.description = description ?? this.description;
     this.muscleGroup = muscleGroup ?? this.muscleGroup;
   }

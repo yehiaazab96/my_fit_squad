@@ -1,9 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_fit_squad/common/constants/constants.dart';
+import 'package:my_fit_squad/common/injection/workouts_injection_container.dart';
 import 'package:my_fit_squad/features/base/presentation/screens/side_menu_screen.dart';
+import 'package:my_fit_squad/features/base/presentation/widgets/app_logo.dart';
 import 'package:my_fit_squad/features/home/presentation/screens/home_base_screen.dart';
 import 'package:my_fit_squad/features/home/presentation/screens/place2.dart';
 import 'package:my_fit_squad/features/home/presentation/screens/profile.dart';
+import 'package:my_fit_squad/features/workouts_management/helpers/workout_screen_type.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/screens/workouts_base_screen.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/widgets/workouts_app_bar_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -66,13 +71,46 @@ enum NavigationBarItem {
       case workouts:
         return PreferredSize(
             preferredSize: Size.fromHeight(4.h),
-            child: const WorkoutsAppBarWidget());
+            child: Consumer(builder: (_, ref, __) {
+              var currentScreen = ref.watch(workoutScreenViewModelProvider);
+              return currentScreen == WorkoutScreenType.other
+                  ? Container()
+                  : WorkoutsAppBarWidget();
+            }));
       case placeholder2:
         return null;
       case profile:
         return null;
       default:
         return null;
+    }
+  }
+
+  Widget? get leadingWidget {
+    switch (this) {
+      case workouts:
+        return Consumer(builder: (_, ref, __) {
+          var currentScreen = ref.watch(workoutScreenViewModelProvider);
+          return currentScreen == WorkoutScreenType.other
+              ? InkWell(
+                  onTap: () {
+                    ref
+                        .watch(workoutScreenViewModelProvider.notifier)
+                        .pop(type: WorkoutScreenType.workouts);
+                  },
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                  ),
+                )
+              : AppLogo(
+                  margin: EdgeInsetsDirectional.only(start: 3.w, bottom: 1.h),
+                );
+        });
+
+      default:
+        return AppLogo(
+          margin: EdgeInsetsDirectional.only(start: 3.w, bottom: 1.h),
+        );
     }
   }
 

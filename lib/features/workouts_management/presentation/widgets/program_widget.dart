@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:my_fit_squad/common/api/api_urls.dart';
+import 'package:my_fit_squad/features/base/presentation/widgets/app_network_image.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/program.dart';
-import 'package:my_fit_squad/gen/assets.gen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ProgramWidget extends StatelessWidget {
@@ -12,6 +11,8 @@ class ProgramWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${program?.classes?.first.cls?.classWorkouts?.first.workout?.image ?? ''}');
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -27,24 +28,10 @@ class ProgramWidget extends StatelessWidget {
         child: Stack(
           children: [
             Positioned.fill(
-              child: Image.network(
-                '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${program?.classes?.first.classWorkouts?.first.workout?.image ?? ''}',
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-                  return SpinKitWaveSpinner(
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    waveColor: Theme.of(context).colorScheme.inversePrimary,
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return Assets.images.loginBg.image(fit: BoxFit.cover);
-                },
-                opacity: const AlwaysStoppedAnimation(0.85),
-              ),
-            ),
+                child: AppNetworkImage(
+              url:
+                  '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${program?.classes?.first.cls?.classWorkouts?.first.workout?.image ?? ''}',
+            )),
             Positioned(
                 bottom: 0,
                 left: 0,

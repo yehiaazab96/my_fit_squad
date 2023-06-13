@@ -5,7 +5,6 @@ import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/active_shimmer_card.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/column_row.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/list_loading.dart';
-import 'package:my_fit_squad/features/workouts_management/presentation/widgets/class_widget.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/widgets/program_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
