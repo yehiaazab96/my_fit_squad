@@ -9,6 +9,7 @@ import 'package:my_fit_squad/features/base/presentation/view_models/base_view_mo
 import 'package:my_fit_squad/features/user_management/data/model/user_model.dart';
 import 'package:my_fit_squad/features/user_management/data/repositories/user_repository_impl.dart';
 import 'package:my_fit_squad/features/user_management/presentation/global_states/login_state.dart';
+import 'package:my_fit_squad/features/user_management/presentation/screens/join_us.dart';
 import '../../helpers/mixins/user_validator_mixin.dart';
 
 class LoginViewModel extends StateNotifier<BaseState<SignUpState>>
@@ -52,5 +53,11 @@ class LoginViewModel extends StateNotifier<BaseState<SignUpState>>
 
   openForgetPasswordDialog(Dialog dialog) {
     showCustomDialog(dialog);
+  }
+
+  navigateToJoisUs() {
+    navigateToScreenNamed(
+      JoinUs.routeName,
+    );
   }
 }

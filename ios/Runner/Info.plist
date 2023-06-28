@@ -52,5 +52,12 @@
 		<string>en</string>
 		<string>ar</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+			<string>We need your permission to aceess your library</string>
+	<key>NSCameraUsageDescription</key>
+			<string>We need your permission to aceess your Camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+			<string>We need your permission to aceess your library</string>
+
 </dict>
 </plist>

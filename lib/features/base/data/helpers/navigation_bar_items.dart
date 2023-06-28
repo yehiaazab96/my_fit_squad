@@ -1,12 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_fit_squad/common/constants/constants.dart';
 import 'package:my_fit_squad/common/injection/workouts_injection_container.dart';
 import 'package:my_fit_squad/features/base/presentation/screens/side_menu_screen.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/app_logo.dart';
+import 'package:my_fit_squad/features/coaches_clients_management/presentation/screens/squad_base_screen.dart';
 import 'package:my_fit_squad/features/home/presentation/screens/home_base_screen.dart';
-import 'package:my_fit_squad/features/home/presentation/screens/place2.dart';
 import 'package:my_fit_squad/features/home/presentation/screens/profile.dart';
 import 'package:my_fit_squad/features/workouts_management/helpers/workout_screen_type.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/screens/workouts_base_screen.dart';
@@ -16,7 +15,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 enum NavigationBarItem {
   home,
   workouts,
-  placeholder2,
+  squad,
   profile;
 
   IconData get icon {
@@ -25,8 +24,8 @@ enum NavigationBarItem {
         return Icons.home;
       case workouts:
         return Icons.play_circle_outlined;
-      case placeholder2:
-        return Icons.account_tree_outlined;
+      case squad:
+        return Icons.people_outline_outlined;
       case profile:
         return Icons.person;
       default:
@@ -40,8 +39,8 @@ enum NavigationBarItem {
         return 'home'.tr();
       case workouts:
         return 'workouts'.tr();
-      case placeholder2:
-        return 'place2'.tr();
+      case squad:
+        return 'squad'.tr();
       case profile:
         return 'profile'.tr();
       default:
@@ -55,10 +54,10 @@ enum NavigationBarItem {
         return const SideMenuScreen(screen: HomeBaseScreen());
       case workouts:
         return const SideMenuScreen(screen: WorkoutsBaseScreen());
-      case placeholder2:
-        return SideMenuScreen(screen: const Place2Screen());
+      case squad:
+        return const SideMenuScreen(screen: SquadBaseScreen());
       case profile:
-        return SideMenuScreen(screen: const ProfileScreen());
+        return const SideMenuScreen(screen: ProfileScreen());
       default:
         return const SideMenuScreen(screen: HomeBaseScreen());
     }
@@ -77,7 +76,7 @@ enum NavigationBarItem {
                   ? Container()
                   : WorkoutsAppBarWidget();
             }));
-      case placeholder2:
+      case squad:
         return null;
       case profile:
         return null;
@@ -121,7 +120,7 @@ enum NavigationBarItem {
       case 1:
         return NavigationBarItem.workouts;
       case 2:
-        return NavigationBarItem.placeholder2;
+        return NavigationBarItem.squad;
       case 3:
         return NavigationBarItem.profile;
       default:

@@ -1,3 +1,8 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_fit_squad/common/api/api_methods.dart';
 import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
@@ -9,7 +14,22 @@ class UserNetworkDataSource {
         hasToken: false, data: {'email': email, 'password': password});
   }
 
-  Future<BaseApiResult<User>> getUserRemoteProfile(String id) async {
-    return await ApiMethods<User>().get('', hasToken: true);
+  Future<BaseApiResult<User>> signUp(User user, {XFile? profileImage}) async {
+    Map<String, dynamic> map = user.toJson();
+    if (profileImage != null) {
+      File file = File(profileImage.path);
+      String fileName = file.path.split('/').last;
+
+      map['profile_img'] = await MultipartFile.fromFile(
+        file.path,
+        filename: fileName,
+      );
+    }
+    FormData formdata = FormData.fromMap(map);
+
+    return await ApiMethods<User>().postWithFormData(
+        ApiUrls.user + ApiUrls.signup,
+        hasToken: false,
+        data: formdata);
   }
 }

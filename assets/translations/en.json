@@ -8,6 +8,10 @@
   "tryAgain": "Please try again later",
   "emptyEmail": "Please enter an email",
   "emptyPassword": "Please enter an password",
+  "passwordMatch": "Passwords don't match",
+  "emptyLastName": "Please enter your Last name",
+  "emptyFirstName": "Please enter your First name",
+  "emptyAge": "Please enter your age",
   "invalidEmail": "Please enter a valid email",
   "myFitSquad": "My Fit Squad",
   "log_to_account": "Log to your account",
@@ -16,5 +20,7 @@
   "email": "Email",
   "password": "Password",
   "confirm_password": "Confirm Password",
-  "browse_all_workouts" : "BROWSE ALL WORKOUTS"
+  "browse_all_workouts" : "BROWSE ALL WORKOUTS",
+  "join_us" : "Join The Squad"
+
 }

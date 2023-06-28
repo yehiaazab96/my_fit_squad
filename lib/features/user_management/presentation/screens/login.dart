@@ -89,13 +89,34 @@ class _LoginScreenState extends State<LoginScreen> with BaseViewModel {
                           ).paddingBottom(20),
                           buildLoginForms(context),
                           buildActionButton(context),
-                          GestureDetector(
-                            // onTap: () => buildForgetPasswordDialog(context),
-                            child: Text("forgot_password".tr(),
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge)
-                                .paddingTop(15)
-                                .align(Alignment.center),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  ProviderScope.containerOf(context)
+                                      .read(loginViewModelProvider.notifier)
+                                      .navigateToJoisUs();
+                                },
+                                child: Text("join_us".tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                decoration:
+                                                    TextDecoration.underline))
+                                    .paddingTop(15)
+                                    .align(Alignment.center),
+                              ),
+                              GestureDetector(
+                                child: Text("forgot_password".tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge)
+                                    .paddingTop(15)
+                                    .align(Alignment.center),
+                              ),
+                            ],
                           ),
                         ],
                       )
@@ -109,10 +130,7 @@ class _LoginScreenState extends State<LoginScreen> with BaseViewModel {
                               topRight: Radius.circular(32))),
                     )
                         .animate()
-                        // .fadeIn(duration: 1.seconds)
                         .flip(duration: 1.seconds, begin: -1, end: 0)
-                        // .fade(duration: 1.seconds)
-                        // .scale(delay: 0.5.seconds)
                         .slideY(begin: 0.4, end: 0),
                   ],
                 ),

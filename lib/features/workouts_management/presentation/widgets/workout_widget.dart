@@ -14,7 +14,6 @@ class WorkoutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('${workout?.image ?? ''}');
     return GestureDetector(
       onTap: () {
         Future.delayed(0.seconds, () {

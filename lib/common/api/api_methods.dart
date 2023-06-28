@@ -157,6 +157,7 @@ class ApiMethods<T> {
       print(response.toString());
       return _handleResponse(response);
     } on DioError catch (error) {
+      print(error);
       return _catchError(error);
     }
   }
@@ -166,6 +167,8 @@ class ApiMethods<T> {
     Map<String, dynamic> extras = {};
     extras[authorizationRequired] = hasToken;
     var options = Options(
+        followRedirects: false,
+        validateStatus: (status) => true,
         extra: extras,
         headers: hasToken
             ? {

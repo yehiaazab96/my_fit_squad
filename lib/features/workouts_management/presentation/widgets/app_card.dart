@@ -6,10 +6,12 @@ class AppCard extends StatelessWidget {
   final EdgeInsets? externalPadding;
   final EdgeInsets? internalPadding;
   final double? height;
+  final Color? color;
 
   const AppCard(
       {super.key,
       this.child,
+      this.color,
       this.externalPadding,
       this.internalPadding,
       this.height});
@@ -20,6 +22,7 @@ class AppCard extends StatelessWidget {
       padding: externalPadding ??
           EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.w),
       child: Card(
+        color: color,
         child: Container(
             height: height,
             padding: internalPadding ??

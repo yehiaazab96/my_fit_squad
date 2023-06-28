@@ -11,8 +11,6 @@ class ProgramWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${program?.classes?.first.cls?.classWorkouts?.first.workout?.image ?? ''}');
     return GestureDetector(
       onTap: () {},
       child: Container(

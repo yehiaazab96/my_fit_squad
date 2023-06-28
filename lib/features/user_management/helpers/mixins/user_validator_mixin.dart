@@ -6,6 +6,10 @@ mixin UserValidatorMixin {
   List<BaseFormError> validateUserField({
     String? email,
     String? password,
+    String? confirmPassword,
+    String? firstName,
+    String? lastName,
+    String? age,
   }) {
     List<BaseFormError> errors = [];
     if (email != null) {
@@ -23,6 +27,39 @@ mixin UserValidatorMixin {
         errors.add(BaseFormError(
             field: UserFieldType.password.field,
             message: "emptyPassword".tr()));
+      }
+    }
+
+    if (confirmPassword != null) {
+      if (confirmPassword.isEmpty) {
+        errors.add(BaseFormError(
+            field: UserFieldType.confirmPassword.field,
+            message: "emptyPassword".tr()));
+      } else if (confirmPassword != password) {
+        errors.add(BaseFormError(
+            field: UserFieldType.confirmPassword.field,
+            message: "passwordMatch".tr()));
+      }
+    }
+
+    if (firstName != null) {
+      if (firstName.isEmpty) {
+        errors.add(BaseFormError(
+            field: UserFieldType.firstName.field,
+            message: "emptyFirstName".tr()));
+      }
+    }
+    if (lastName != null) {
+      if (lastName.isEmpty) {
+        errors.add(BaseFormError(
+            field: UserFieldType.lastName.field,
+            message: "emptyLastName".tr()));
+      }
+    }
+    if (age != null) {
+      if (age.isEmpty) {
+        errors.add(BaseFormError(
+            field: UserFieldType.age.field, message: "emptyAge".tr()));
       }
     }
     return errors;

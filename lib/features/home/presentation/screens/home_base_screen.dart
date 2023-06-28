@@ -19,7 +19,6 @@ class _HomeBaseScreenState extends State<HomeBaseScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     return Expanded(
       child: Navigator(
         key: Constants.homeNavigatorKey,

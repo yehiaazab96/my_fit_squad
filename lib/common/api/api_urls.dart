@@ -5,7 +5,13 @@ class ApiUrls {
 
   //user
   static const user = '/user';
+  static const users = '/users';
+
   static const login = '/login';
+  static const signup = '/signup';
+
+  static const coaches = '/coaches';
+  static const clients = '/clients';
 
   //categories
   static const categories = '/categories';

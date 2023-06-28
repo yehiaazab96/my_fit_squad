@@ -1,4 +1,12 @@
-enum UserFieldType { email, password, unknown }
+enum UserFieldType {
+  email,
+  password,
+  confirmPassword,
+  firstName,
+  lastName,
+  age,
+  unknown
+}
 
 extension UserFieldsExtension on UserFieldType {
   String get field {
@@ -7,6 +15,14 @@ extension UserFieldsExtension on UserFieldType {
         return 'email';
       case UserFieldType.password:
         return 'password';
+      case UserFieldType.confirmPassword:
+        return 'confrim_password';
+      case UserFieldType.firstName:
+        return 'first_name';
+      case UserFieldType.lastName:
+        return 'last_name';
+      case UserFieldType.age:
+        return 'age';
       default:
         return '';
     }
@@ -19,6 +35,13 @@ extension UserFieldsExtension on UserFieldType {
       case 'password':
         return UserFieldType.password;
       case 'confirm_password':
+        return UserFieldType.confirmPassword;
+      case 'first_name':
+        return UserFieldType.firstName;
+      case 'last_name':
+        return UserFieldType.lastName;
+      case 'age':
+        return UserFieldType.age;
       default:
         return UserFieldType.unknown;
     }
