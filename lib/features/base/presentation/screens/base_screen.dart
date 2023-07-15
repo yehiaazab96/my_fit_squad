@@ -3,7 +3,6 @@ import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/features/base/data/helpers/navigation_bar_items.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/app_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:my_fit_squad/features/base/presentation/widgets/app_logo.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class BaseScreen extends StatelessWidget {
@@ -23,11 +22,7 @@ class BaseScreen extends StatelessWidget {
                     bottom: item.appBarBottomWidget,
                   )
                 : null,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {},
-              shape: const CircleBorder(),
-              child: const Text('Add'),
-            ),
+            floatingActionButton: item.currentFloatinActionButton,
             floatingActionButtonLocation: Device.width > 800
                 ? FloatingActionButtonLocation.endFloat
                 : FloatingActionButtonLocation.centerDocked,

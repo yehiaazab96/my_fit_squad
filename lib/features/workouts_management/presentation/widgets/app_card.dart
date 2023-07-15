@@ -7,12 +7,16 @@ class AppCard extends StatelessWidget {
   final EdgeInsets? internalPadding;
   final double? height;
   final Color? color;
+  final Color? borderColor;
+  final BorderRadiusGeometry? borderRadius;
 
   const AppCard(
       {super.key,
       this.child,
       this.color,
       this.externalPadding,
+      this.borderRadius,
+      this.borderColor,
       this.internalPadding,
       this.height});
 
@@ -27,6 +31,9 @@ class AppCard extends StatelessWidget {
             height: height,
             padding: internalPadding ??
                 EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+            decoration: BoxDecoration(
+                border: Border.all(color: borderColor ?? Colors.transparent),
+                borderRadius: borderRadius ?? BorderRadius.zero),
             width: double.infinity,
             child: child),
       ),

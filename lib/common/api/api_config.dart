@@ -4,7 +4,7 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:my_fit_squad/common/api/api_error_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../injection/injection_container.dart' as di;
-import 'package:flutter/foundation.dart' show kIsWeb;
+// import 'package:flutter/foundation.dart' show kIsWeb;
 import '../constants/constants.dart';
 import 'api_urls.dart';
 

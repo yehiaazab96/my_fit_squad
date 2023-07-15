@@ -15,6 +15,10 @@ class UserRepositoryImpl {
     return await networkDataSource.login(email, password);
   }
 
+  Future<BaseApiResult<User>> getUserProfile(String id) async {
+    return await networkDataSource.getUser(id);
+  }
+
   Future<BaseApiResult<User>> signUp(User user, {XFile? profileImage}) async {
     return await networkDataSource.signUp(user, profileImage: profileImage);
   }

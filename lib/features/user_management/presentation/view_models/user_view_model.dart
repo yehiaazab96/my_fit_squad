@@ -31,8 +31,8 @@ class UserViewModel extends StateNotifier<User?> with BaseViewModel {
   }
 
   void setLocalUserProfile(User? user) {
-    _userRepositoryImpl.setLocalUserProfile(user);
     state = user;
+    _userRepositoryImpl.setLocalUserProfile(user);
   }
 
   Future signout() async {
@@ -41,6 +41,13 @@ class UserViewModel extends StateNotifier<User?> with BaseViewModel {
   }
 
   void setState(User? user) {
+    setLocalUserProfile(user);
+  }
+
+  changeRequestStatus(bool? status) {
+    var user = state;
+    user?.requestPending = status;
+    state = user;
     setLocalUserProfile(user);
   }
 

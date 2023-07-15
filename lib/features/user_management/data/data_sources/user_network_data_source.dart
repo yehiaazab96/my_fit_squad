@@ -2,9 +2,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_fit_squad/common/api/api_methods.dart';
 import 'package:my_fit_squad/common/api/api_urls.dart';
+import 'package:my_fit_squad/common/constants/constants.dart';
+import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
 import 'package:my_fit_squad/features/user_management/data/model/user_model.dart';
 
@@ -31,5 +34,14 @@ class UserNetworkDataSource {
         ApiUrls.user + ApiUrls.signup,
         hasToken: false,
         data: formdata);
+  }
+
+  Future<BaseApiResult<User>> getUser(String id) async {
+    var user = ProviderScope.containerOf(Constants.navigatorKey.currentContext!)
+        .read(userProvider);
+    return await ApiMethods<User>().get(
+      '${ApiUrls.user}${user?.role == 'client' ? ApiUrls.clients : ApiUrls.coaches}/$id',
+      hasToken: true,
+    );
   }
 }

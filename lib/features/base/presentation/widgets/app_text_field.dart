@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class AppTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -7,12 +8,14 @@ class AppTextField extends StatelessWidget {
   final Widget? prefix;
   final Widget? suffix;
   final bool isSecured;
+  final int? maxLines;
   final bool isReadOnly;
   final TextInputType? inputType;
   final EdgeInsetsDirectional margin;
   final EdgeInsetsDirectional? contentPadding;
   final Function? onTap;
   final String? errorText;
+  final Function(String)? onChanged;
 
   const AppTextField({
     Key? key,
@@ -20,7 +23,9 @@ class AppTextField extends StatelessWidget {
     this.hint,
     this.label,
     this.prefix,
+    this.maxLines,
     this.suffix,
+    this.onChanged,
     this.isSecured = false,
     this.isReadOnly = false,
     this.inputType = TextInputType.text,
@@ -47,11 +52,14 @@ class AppTextField extends StatelessWidget {
             controller: controller,
             keyboardType: inputType,
             readOnly: isReadOnly,
+            onChanged: onChanged,
+            maxLines: maxLines ?? 1,
             decoration: InputDecoration(
               labelText: label,
               hintText: hint,
               prefixIcon: prefix,
               suffixIcon: suffix,
+              floatingLabelBehavior: FloatingLabelBehavior.always,
               contentPadding: contentPadding ??
                   const EdgeInsetsDirectional.only(
                       top: 15, bottom: 15, start: 30, end: 30),
@@ -59,30 +67,32 @@ class AppTextField extends StatelessWidget {
               hintStyle: Theme.of(context).textTheme.labelLarge,
               border: InputBorder.none,
               enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Theme.of(context).focusColor),
-                  borderRadius: BorderRadius.circular(0),
+                  borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.outlineVariant),
+                  borderRadius: BorderRadius.circular(2.w),
                   gapPadding: 7),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).focusColor),
-                borderRadius: BorderRadius.circular(0),
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.secondary),
+                borderRadius: BorderRadius.circular(2.w),
                 gapPadding: 7,
               ),
               errorBorder: OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Theme.of(context).colorScheme.error),
-                borderRadius: BorderRadius.circular(0),
+                borderRadius: BorderRadius.circular(2.w),
                 gapPadding: 7,
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Theme.of(context).colorScheme.error),
-                borderRadius: BorderRadius.circular(0),
+                borderRadius: BorderRadius.circular(2.w),
                 gapPadding: 7,
               ),
               errorText: errorText,
               errorStyle: const TextStyle(fontSize: 0, letterSpacing: 0),
-              prefixIconColor: Theme.of(context).primaryColor,
-              suffixIconColor: Theme.of(context).primaryColor,
+              prefixIconColor: Theme.of(context).colorScheme.secondary,
+              suffixIconColor: Theme.of(context).colorScheme.secondary,
             ),
             obscureText: isSecured,
             cursorColor: Theme.of(context).primaryColor,

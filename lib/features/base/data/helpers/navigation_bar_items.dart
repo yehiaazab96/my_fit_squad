@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_fit_squad/common/constants/constants.dart';
 import 'package:my_fit_squad/common/injection/workouts_injection_container.dart';
 import 'package:my_fit_squad/features/base/presentation/screens/side_menu_screen.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/app_logo.dart';
 import 'package:my_fit_squad/features/coaches_clients_management/presentation/screens/squad_base_screen.dart';
 import 'package:my_fit_squad/features/home/presentation/screens/home_base_screen.dart';
-import 'package:my_fit_squad/features/home/presentation/screens/profile.dart';
+import 'package:my_fit_squad/features/user_management/presentation/screens/profile_base_screen.dart';
 import 'package:my_fit_squad/features/workouts_management/helpers/workout_screen_type.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/screens/workouts_base_screen.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/widgets/workouts_app_bar_widget.dart';
@@ -57,7 +58,7 @@ enum NavigationBarItem {
       case squad:
         return const SideMenuScreen(screen: SquadBaseScreen());
       case profile:
-        return const SideMenuScreen(screen: ProfileScreen());
+        return const SideMenuScreen(screen: ProfileBaseScreen());
       default:
         return const SideMenuScreen(screen: HomeBaseScreen());
     }
@@ -72,7 +73,7 @@ enum NavigationBarItem {
             preferredSize: Size.fromHeight(4.h),
             child: Consumer(builder: (_, ref, __) {
               var currentScreen = ref.watch(workoutScreenViewModelProvider);
-              return currentScreen == WorkoutScreenType.other
+              return currentScreen.screen == WorkoutScreenType.other
                   ? Container()
                   : WorkoutsAppBarWidget();
             }));
@@ -89,13 +90,12 @@ enum NavigationBarItem {
     switch (this) {
       case workouts:
         return Consumer(builder: (_, ref, __) {
-          var currentScreen = ref.watch(workoutScreenViewModelProvider);
+          var currentScreen = ref.watch(workoutScreenViewModelProvider).screen;
+
           return currentScreen == WorkoutScreenType.other
               ? InkWell(
                   onTap: () {
-                    ref
-                        .watch(workoutScreenViewModelProvider.notifier)
-                        .pop(type: WorkoutScreenType.workouts);
+                    ref.watch(workoutScreenViewModelProvider.notifier).pop();
                   },
                   child: const Icon(
                     Icons.arrow_back_ios,
@@ -125,6 +125,25 @@ enum NavigationBarItem {
         return NavigationBarItem.profile;
       default:
         return NavigationBarItem.home;
+    }
+  }
+
+  Widget? get currentFloatinActionButton {
+    switch (this) {
+      case workouts:
+        return FloatingActionButton(
+          onPressed: () {
+            ProviderScope.containerOf(
+                    Constants.workoutsNavigtorKey.currentContext!)
+                .read(workoutScreenViewModelProvider.notifier)
+                .navigateToAddScreen();
+          },
+          shape: const CircleBorder(),
+          child: const Icon(Icons.add),
+        );
+
+      default:
+        return null;
     }
   }
 }

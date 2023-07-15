@@ -2,13 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:health/health.dart';
 import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
+import 'package:my_fit_squad/common/utils/health_info.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/app_loader.dart';
-import 'package:my_fit_squad/features/base/presentation/widgets/app_network_image.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/column_row.dart';
 import 'package:my_fit_squad/features/home/presentation/widgets/category_container.dart';
-import 'package:my_fit_squad/gen/assets.gen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    HealthInfo.getHeatldataforDuartion(
+        duartion: Duration(days: 1), dataTypes: [HealthDataType.STEPS]);
     return SafeArea(
       minimum: EdgeInsets.symmetric(vertical: 2.h, horizontal: 0.w),
       child: ColumnRow(
@@ -49,8 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       CircleAvatar(
                         foregroundImage: NetworkImage(
                             '${ApiUrls.baseImageUrl}${ApiUrls.users}/${user?.profileImage ?? ''}'),
-
-                        // Assets.images.loginBg.image().image,
                       ),
                       SizedBox(
                         width: 5.w,
@@ -59,10 +59,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Welcome back , ${user?.firstName}'),
-                          Text(
-                            'You have no current program',
-                            style: TextStyle(fontSize: 16),
-                          ),
+                          if (user?.role == 'client')
+                            Text(
+                              user?.currentProgram != null
+                                  ? (user?.currentProgram?.program?.title ?? '')
+                                  : 'There is no program assigned',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          if (user?.role == 'admin')
+                            Text(
+                              '${user?.subscribtionPlan?.title ?? ''} : ${user?.clients?.length ?? 0} out of ${user?.subscribtionPlan?.clients.toInt() ?? 1} Clients',
+                              style: TextStyle(fontSize: 16),
+                            ),
                         ],
                       )
                     ],

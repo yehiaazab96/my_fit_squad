@@ -1,9 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:my_fit_squad/common/api/api_methods.dart';
 import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
+import 'package:my_fit_squad/features/workouts_management/data/model/class_data.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/program.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/class.dart';
+import 'package:my_fit_squad/features/workouts_management/data/model/program_data.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/workout.dart';
+import 'package:my_fit_squad/features/workouts_management/data/model/workout_data.dart';
 import 'package:my_fit_squad/features/workouts_management/helpers/workout_category.dart';
 
 class WorkoutsNetworkDataSource {
@@ -21,11 +25,26 @@ class WorkoutsNetworkDataSource {
     );
   }
 
+  Future<BaseApiResult<Workout>> addWorkout({required WorkoutData data}) async {
+    FormData formData = await data.toFormData();
+    return await ApiMethods<Workout>()
+        .postWithFormData(ApiUrls.workouts, data: formData);
+  }
+
   Future<BaseApiResult<List<Class>>> getClasses() async {
     return await ApiMethods<Class>().getList(ApiUrls.classes);
   }
 
+  Future<BaseApiResult<Class>> addClass({required ClassData data}) async {
+    return await ApiMethods<Class>().post(ApiUrls.classes, data: data.toJson());
+  }
+
   Future<BaseApiResult<List<Program>>> getPrograms() async {
     return await ApiMethods<Program>().getList(ApiUrls.programs);
+  }
+
+  Future<BaseApiResult<Program>> addProgram({required ProgramData data}) async {
+    return await ApiMethods<Program>()
+        .post(ApiUrls.programs, data: data.toJson());
   }
 }

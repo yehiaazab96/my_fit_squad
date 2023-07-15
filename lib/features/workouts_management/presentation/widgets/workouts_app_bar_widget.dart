@@ -45,7 +45,7 @@ class WorkoutsAppBarWidget extends StatelessWidget {
                                     .textTheme
                                     .titleMedium
                                     ?.copyWith(
-                                        color: currentSelectedScreen != e
+                                        color: currentSelectedScreen.screen != e
                                             ? Theme.of(context)
                                                 .colorScheme
                                                 .onSurface

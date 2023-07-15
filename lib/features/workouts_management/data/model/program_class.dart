@@ -10,6 +10,14 @@ class ProgramClass {
     cls = (json['workout'] != null) ? Class.fromJson(json['workout']) : null;
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['day'] = day;
+    data['workout'] = cls?.toJson();
+
+    return data;
+  }
+
   copyWith({
     Class? cls,
     int? day,

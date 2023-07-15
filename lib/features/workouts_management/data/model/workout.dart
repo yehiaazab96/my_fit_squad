@@ -1,3 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_fit_squad/common/constants/constants.dart';
+import 'package:my_fit_squad/common/injection/user_injection_container.dart';
 import 'package:my_fit_squad/features/workouts_management/helpers/muscle_group.dart';
 import 'package:my_fit_squad/features/workouts_management/helpers/workout_category.dart';
 
@@ -7,7 +10,7 @@ class Workout {
   bool? underReview;
   String? image;
   String? equipment;
-
+  String? createdBy;
   List<String>? workoutsMedia;
   WorkoutCategory? category;
   String? description;
@@ -21,6 +24,7 @@ class Workout {
     this.workoutsMedia,
     this.category,
     this.description,
+    this.createdBy,
     this.equipment,
     this.muscleGroup,
   });
@@ -29,6 +33,7 @@ class Workout {
     id = json['_id'];
     title = json['title'];
     underReview = json['under_review'];
+    createdBy = json['added_by'];
     image = json['image'];
     equipment = json['equipment'];
     workoutsMedia = json['workouts_media'] is List
@@ -41,6 +46,28 @@ class Workout {
     muscleGroup = (json['muscle_group'] != null)
         ? MuscleGroup.getMuscleGroup(json['muscle_group'])
         : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['_id'] = id;
+    data['title'] = title;
+    data['under_review'] = underReview;
+    data['image'] = image;
+    data['workouts_media'] = workoutsMedia;
+    data['category'] = category;
+    data['description'] = description;
+    data['muscle_group'] = muscleGroup;
+    data['added_by'] = createdBy;
+
+    return data;
+  }
+
+  Map<String, dynamic> toJsonID() {
+    final Map<String, dynamic> data = {};
+    data['_id'] = id;
+
+    return data;
   }
 
   copyWith(

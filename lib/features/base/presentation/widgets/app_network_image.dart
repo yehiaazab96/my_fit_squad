@@ -3,16 +3,24 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:my_fit_squad/gen/assets.gen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class AppNetworkImage extends StatelessWidget {
+class AppNetworkImage extends StatefulWidget {
   final String? url;
   final String? extention;
+  ImageProvider? image;
 
-  const AppNetworkImage({super.key, this.url, this.extention});
+  AppNetworkImage({super.key, this.url, this.extention});
 
   @override
-  Widget build(BuildContext context) {
-    return Image.network(
-      url ?? '',
+  State<AppNetworkImage> createState() => _AppNetworkImageState();
+}
+
+class _AppNetworkImageState extends State<AppNetworkImage> {
+  Image? img;
+
+  @override
+  void initState() {
+    img = Image.network(
+      widget.url ?? '',
       fit: BoxFit.cover,
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) {
@@ -24,8 +32,8 @@ class AppNetworkImage extends StatelessWidget {
         );
       },
       errorBuilder: (context, error, stackTrace) {
-        print(error);
-        if (extention == '.mp4') {
+        // print(error);
+        if (widget.extention == '.mp4') {
           return Stack(
             children: [
               Positioned.fill(
@@ -49,5 +57,14 @@ class AppNetworkImage extends StatelessWidget {
       },
       opacity: const AlwaysStoppedAnimation(0.85),
     );
+    if (img != null) {
+      widget.image = img!.image;
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return img ?? Container();
   }
 }

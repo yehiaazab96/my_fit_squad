@@ -33,4 +33,9 @@ class WorkoutsViewModel extends StateNotifier<BaseState<WorkoutsState>>
     }
     state = state.copyWith(isLoading: false);
   }
+
+  addWorkoutToList(Workout workout) {
+    state = state.copyWith(
+        data: state.data.copyWith(workouts: [...state.data.workouts, workout]));
+  }
 }

@@ -55,55 +55,20 @@ ButtonStyle elevatedButtonStyle(BuildContext context,
       ));
 }
 
-ButtonStyle textButtonStyle(
-    {EdgeInsetsDirectional? padding,
-    Color? textColor,
-    double? fontSize,
-    FontWeight? fontWeight,
-    String? fontFamily,
-    TextDecoration? decoration}) {
-  return ButtonStyle(
-      padding: MaterialStateProperty.all<EdgeInsetsDirectional>(
-          padding ?? const EdgeInsetsDirectional.all(10)),
-      foregroundColor:
-          MaterialStateProperty.all<Color>(textColor ?? Colors.black),
-      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      minimumSize: MaterialStateProperty.all<Size>(Size.zero),
-      textStyle: MaterialStateProperty.all<TextStyle>(
-        TextStyle(
-          fontSize: 24,
-          fontFamily: FontFamily.roboto,
-          color: Color.fromARGB(192, 6, 8, 89),
-        ),
-      ));
-}
-
 InputDecorationTheme appInputDecorationTheme(BuildContext context) {
   return InputDecorationTheme(
-    labelStyle: TextStyle(
-        fontSize: 16.0,
-        fontFamily: FontFamily.inter,
-        fontWeight: FontWeight.w400,
-        color: const Color(0xff8a92a6)),
-    hintStyle: TextStyle(
-        fontSize: 16.0,
-        fontFamily: FontFamily.inter,
-        fontWeight: FontWeight.w400,
-        color: const Color(0xff8a92a6)),
-    border: InputBorder.none,
+    // border: InputBorder.none,
     contentPadding: const EdgeInsetsDirectional.only(
         top: 15, bottom: 15, start: 20, end: 20),
     enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color(0xff3a57e8)),
-        borderRadius: BorderRadius.circular(5),
-        gapPadding: 7),
+        borderRadius: BorderRadius.circular(5), gapPadding: 7),
     focusedBorder: OutlineInputBorder(
-      borderSide: const BorderSide(color: Color(0xffea6a12)),
+      borderSide: BorderSide(color: AppColors.orange),
       borderRadius: BorderRadius.circular(5),
       gapPadding: 7,
     ),
-    prefixIconColor: const Color(0xffea6a12),
-    suffixIconColor: const Color(0xffea6a12),
+    prefixIconColor: AppColors.orange,
+    suffixIconColor: AppColors.orange,
   );
 }
 

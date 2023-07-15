@@ -8,12 +8,11 @@ import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/app_network_image.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/label.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/class.dart';
-import 'package:my_fit_squad/features/workouts_management/presentation/screens/media_screen.dart';
+import 'package:my_fit_squad/features/workouts_management/presentation/screens/active_class_screen.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/screens/workout_details_screen.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/widgets/app_card.dart';
 import 'package:my_fit_squad/gen/assets.gen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:path/path.dart' as p;
 
 class ClassDetailsScreen extends StatelessWidget {
   static const routeName = './class_details';
@@ -66,28 +65,53 @@ class ClassDetailsScreen extends StatelessWidget {
                 Positioned(
                     bottom: 2.h,
                     left: 2.5.w,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    right: 2.5.w,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          cls?.title ?? '',
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              cls?.title ?? '',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
                                     color: Theme.of(context)
                                         .colorScheme
                                         .inverseSurface,
                                   ),
-                        ),
-                        Text(
-                          "${cls?.classWorkouts?.length} Workouts",
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            ),
+                            Text(
+                              "${cls?.classWorkouts?.length} Workouts",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
                                     color: Theme.of(context)
                                         .colorScheme
                                         .inverseSurface,
                                   ),
+                            ),
+                          ],
                         ),
+                        if (cls != null)
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  Constants.navigatorKey.currentContext!,
+                                  MaterialPageRoute(
+                                      builder: (context) => ActiveClassScreen(
+                                          activeClass: cls!)));
+                            },
+                            child: Icon(
+                              Icons.play_circle_fill_sharp,
+                              size: 12.w,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          )
                       ],
                     ))
               ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_fit_squad/common/constants/colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingList extends StatelessWidget {

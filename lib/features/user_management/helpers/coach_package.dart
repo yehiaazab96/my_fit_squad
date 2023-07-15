@@ -57,15 +57,23 @@ enum CoachPackages {
     return '$clients Clients';
   }
 
+  Map get toJson {
+    return {
+      'package': title,
+      'price': price,
+      'clients': clients,
+    };
+  }
+
   static CoachPackages fromString(String? plan) {
     switch (plan) {
-      case 'Free':
+      case 'free':
         return CoachPackages.free;
-      case 'Silver':
+      case 'silver':
         return CoachPackages.silver;
-      case 'Gold':
+      case 'gold':
         return CoachPackages.gold;
-      case 'Platinum':
+      case 'platinum':
         return CoachPackages.platinum;
       default:
         return CoachPackages.free;

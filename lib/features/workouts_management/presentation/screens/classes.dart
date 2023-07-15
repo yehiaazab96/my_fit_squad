@@ -18,12 +18,16 @@ class ClassesScreen extends StatefulWidget {
 class _ClassesScreenState extends State<ClassesScreen> {
   @override
   void initState() {
+    fetchClasses();
+    super.initState();
+  }
+
+  void fetchClasses() {
     Future.delayed(0.seconds, () {
       ProviderScope.containerOf(context)
           .read(classesViewModelProvider.notifier)
           .getClasses();
     });
-    super.initState();
   }
 
   @override
@@ -46,8 +50,12 @@ class _ClassesScreenState extends State<ClassesScreen> {
                           childHeight: 20.h,
                           child: const MyShimmerCard(),
                         )
-                      : SingleChildScrollView(
-                          child: Column(
+                      : RefreshIndicator(
+                          onRefresh: () {
+                            fetchClasses();
+                            return Future.delayed(1.seconds);
+                          },
+                          child: ListView(
                             children: classes
                                 .map((e) => ClassWidget(
                                       cls: e,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class AppTextFieldErrorText extends StatelessWidget {
   final String? errorText;
@@ -7,18 +8,20 @@ class AppTextFieldErrorText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      // margin: EdgeInsets.symmetric(horizontal: 15.w),
-      padding: const EdgeInsets.all(5),
-      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.2.h),
+      padding: EdgeInsets.symmetric(vertical: 0.4.h),
+      // width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          color: Theme.of(context).highlightColor,
+          color: Theme.of(context).colorScheme.errorContainer.withOpacity(0.8),
           border: Border.all(
             color: Colors.transparent,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(8))),
       child: Text(
         errorText ?? "",
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Theme.of(context).colorScheme.error,
+            ),
       ),
     );
   }

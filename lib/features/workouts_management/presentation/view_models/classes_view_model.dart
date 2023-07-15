@@ -14,7 +14,7 @@ class ClassesViewModel extends StateNotifier<BaseState<ClassesState>>
   ClassesViewModel(this._workoutsRepositoryImpl)
       : super(BaseState(data: ClassesState()));
 
-  getClasses() async {
+  Future<List<Class>?> getClasses() async {
     hideKeyboard();
 
     state = state.copyWith(isLoading: true);
@@ -23,6 +23,9 @@ class ClassesViewModel extends StateNotifier<BaseState<ClassesState>>
     if (result.data != null) {
       print(result.data);
       state = state.copyWith(data: state.data.copyWith(classes: result.data));
+      state = state.copyWith(isLoading: false);
+
+      return result.data;
     } else {
       if (result.apiErrors != null) {
         showToastMessage(result.errorMessage ?? "Something went wrong");
@@ -31,5 +34,10 @@ class ClassesViewModel extends StateNotifier<BaseState<ClassesState>>
       }
     }
     state = state.copyWith(isLoading: false);
+  }
+
+  addClassToList(Class cls) {
+    state = state.copyWith(
+        data: state.data.copyWith(classes: [...state.data.classes, cls]));
   }
 }

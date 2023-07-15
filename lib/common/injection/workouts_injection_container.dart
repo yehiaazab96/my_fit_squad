@@ -6,6 +6,7 @@ import 'package:my_fit_squad/features/workouts_management/helpers/workout_screen
 import 'package:my_fit_squad/features/workouts_management/presentation/global_states/categories_state.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/global_states/classes_state.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/global_states/programs_state.dart';
+import 'package:my_fit_squad/features/workouts_management/presentation/global_states/workout_screens_state.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/global_states/workouts_state.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/view_models/categories_view_model%20copy.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/view_models/classes_view_model.dart';
@@ -25,7 +26,8 @@ final workoutsRepositoryProvider = Provider<WorkoutRepositoryImpl>((ref) {
 });
 
 final workoutScreenViewModelProvider =
-    StateNotifierProvider<WorkoutsScreensViewModel, WorkoutScreenType>((ref) {
+    StateNotifierProvider<WorkoutsScreensViewModel, WorkoutsScreensState>(
+        (ref) {
   return WorkoutsScreensViewModel();
 });
 

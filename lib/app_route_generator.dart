@@ -9,7 +9,7 @@ class AppRouteGenerator {
 
     switch (name) {
       case RouteScreen.routeName:
-        return const SquadScreen();
+        return RouteScreen();
 
       case JoinUs.routeName:
         return const JoinUs();

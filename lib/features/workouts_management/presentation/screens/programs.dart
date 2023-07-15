@@ -18,12 +18,16 @@ class ProgramsScreen extends StatefulWidget {
 class _ProgramsScreenState extends State<ProgramsScreen> {
   @override
   void initState() {
+    fetchPrograms();
+    super.initState();
+  }
+
+  void fetchPrograms() {
     Future.delayed(0.seconds, () {
       ProviderScope.containerOf(context)
           .read(programsViewModelProvider.notifier)
           .getPrograms();
     });
-    super.initState();
   }
 
   @override
@@ -45,8 +49,12 @@ class _ProgramsScreenState extends State<ProgramsScreen> {
                           childHeight: 20.h,
                           child: const MyShimmerCard(),
                         )
-                      : SingleChildScrollView(
-                          child: Column(
+                      : RefreshIndicator(
+                          onRefresh: () {
+                            fetchPrograms();
+                            return Future.delayed(1.seconds);
+                          },
+                          child: ListView(
                             children: programs
                                 .map((e) => ProgramWidget(
                                       program: e,

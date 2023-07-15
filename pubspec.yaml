@@ -50,6 +50,12 @@ dependencies:
   google_fonts: ^5.0.0
   video_player: 
   image_picker: ^0.8.9
+  health: 
+  calendar_timeline: ^1.1.2
+  flutter_rating_bar: ^4.0.1
+
+
+
 
 
 

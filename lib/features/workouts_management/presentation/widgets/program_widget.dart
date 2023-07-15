@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_fit_squad/common/api/api_urls.dart';
+import 'package:my_fit_squad/common/injection/workouts_injection_container.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/app_network_image.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/program.dart';
+import 'package:my_fit_squad/features/workouts_management/helpers/entities/program_details_args.dart';
+import 'package:my_fit_squad/features/workouts_management/presentation/screens/program_details_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ProgramWidget extends StatelessWidget {
   final Program? program;
-  const ProgramWidget({super.key, this.program});
+  final Function? onTap;
+  const ProgramWidget({super.key, this.program, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Future.delayed(0.seconds, () {
+          if (onTap != null) {
+            onTap!();
+          } else {
+            ProviderScope.containerOf(context)
+                .read(workoutScreenViewModelProvider.notifier)
+                .navigateTo(ProgramDetailsScreen.routeName,
+                    arguments: ProgramDetailsArgs(program: program));
+          }
+        });
+      },
       child: Container(
         margin: EdgeInsetsDirectional.fromSTEB(3.w, 0.5.h, 3.w, 0.5.h),
         height: 20.h,

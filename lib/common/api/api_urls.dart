@@ -12,6 +12,8 @@ class ApiUrls {
 
   static const coaches = '/coaches';
   static const clients = '/clients';
+  static const requestPending = '/request-pending';
+  static const joinRequestRespond = '/request-respond';
 
   //categories
   static const categories = '/categories';

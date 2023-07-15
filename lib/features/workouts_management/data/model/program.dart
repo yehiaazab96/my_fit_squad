@@ -1,19 +1,38 @@
-import 'package:my_fit_squad/features/workouts_management/data/model/class.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/program_class.dart';
 
 class Program {
   String? id;
   String? title;
   String? description;
+  String? createdBy;
   int? duration;
   List<ProgramClass>? classes;
-  Program({this.id, this.title, this.description, this.duration, this.classes});
+  Program(
+      {this.id,
+      this.title,
+      this.description,
+      this.duration,
+      this.classes,
+      this.createdBy});
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['_id'] = id;
+    data['title'] = title;
+    data['description'] = description;
+    data['duration'] = duration;
+    data['days'] = classes?.map((e) => e.toJson()).toList();
+    data['created_by'] = createdBy;
+
+    return data;
+  }
 
   Program.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     title = json['title'];
     description = json['description'];
     duration = json['duration'];
+    createdBy = json['created_by'];
     classes = (json['days'] != null)
         ? (json['days'] as List).map((e) => ProgramClass.fromJson(e)).toList()
         : null;

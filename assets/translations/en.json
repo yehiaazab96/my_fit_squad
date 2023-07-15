@@ -21,6 +21,11 @@
   "password": "Password",
   "confirm_password": "Confirm Password",
   "browse_all_workouts" : "BROWSE ALL WORKOUTS",
-  "join_us" : "Join The Squad"
+  "join_us" : "Join The Squad",
+  "emptyTitle": "Please enter a title",
+  "emptyDescription": "Please enter a description ",
+  "emptyImage": "Please select an image"
+  ,"notEnoughtWorkouts" : "Must add at least 2 workouts"
+
 
 }

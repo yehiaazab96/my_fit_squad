@@ -18,7 +18,20 @@ class ClassWorkout {
     type = (json['workout_type'] != null)
         ? WorkoutType.getWorkoutType(json['workout_type'])
         : null;
-    workout = Workout.fromJson(json['workout']);
+    if (json['workout'] is Map) {
+      workout = Workout.fromJson(json['workout']);
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['reps'] = reps;
+    data['repeat'] = repeat;
+    data['rest_time'] = restTime;
+    data['type'] = type?.title.toLowerCase();
+    data['workout'] = workout?.toJsonID();
+
+    return data;
   }
 
   copyWith(

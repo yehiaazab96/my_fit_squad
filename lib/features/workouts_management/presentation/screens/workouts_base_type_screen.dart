@@ -14,7 +14,7 @@ class WorkoutsBaseScreenTypeScreen extends StatelessWidget {
         minimum: EdgeInsets.fromLTRB(0.w, 2.h, 0.w, 2.h),
         child: Consumer(builder: (_, ref, __) {
           var currentSelectedScreen = ref.watch(workoutScreenViewModelProvider);
-          return currentSelectedScreen.Screen;
+          return currentSelectedScreen.screen!.Screen;
         }));
   }
 }

@@ -18,12 +18,16 @@ class WorkoutsScreen extends StatefulWidget {
 class _WorkoutsScreenState extends State<WorkoutsScreen> {
   @override
   void initState() {
+    fetchWorkouts();
+    super.initState();
+  }
+
+  void fetchWorkouts() {
     Future.delayed(0.seconds, () {
       ProviderScope.containerOf(context)
           .read(workoutsViewModelProvider.notifier)
           .getWorkouts();
     });
-    super.initState();
   }
 
   @override
@@ -136,8 +140,12 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
                           childHeight: 20.h,
                           child: const MyShimmerCard(),
                         )
-                      : SingleChildScrollView(
-                          child: Column(
+                      : RefreshIndicator(
+                          onRefresh: () {
+                            fetchWorkouts();
+                            return Future.delayed(1.seconds);
+                          },
+                          child: ListView(
                             children: workouts
                                 .map((e) => WorkoutWidget(
                                       workout: e,
