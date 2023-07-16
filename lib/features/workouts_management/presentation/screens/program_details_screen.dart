@@ -28,9 +28,13 @@ class _ProgramDetailsScreenState extends State<ProgramDetailsScreen> {
 
   @override
   void initState() {
-    if (widget.programArgs?.startDate != null) {
+    if (widget.programArgs?.startDateString != null) {
       startDate =
-          DateFormat('dd/MM/yyyy').parse(widget.programArgs!.startDate!);
+          DateFormat('dd/MM/yyyy').parse(widget.programArgs!.startDateString!);
+      selectedData = startDate;
+    }
+    if (widget.programArgs?.startDate != null) {
+      startDate = widget.programArgs!.startDate!;
       selectedData = startDate;
     }
     currentClass = widget.programArgs?.program?.classes?.first;

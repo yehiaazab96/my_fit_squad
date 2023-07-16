@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -85,12 +87,20 @@ class _ActiveClassScreenState extends State<ActiveClassScreen> {
                   ),
                 ),
                 SizedBox(
-                  width: 30.w,
+                  width: 40.w,
                   child: inRestTime
-                      ? SpinKitRing(
-                          color: Theme.of(context).colorScheme.secondary,
-                          duration: restTime.seconds,
-                          size: 15.w,
+                      ? Stack(
+                          children: [
+                            SpinKitFadingCircle(
+                              color: Theme.of(context).colorScheme.secondary,
+                              size: 20.w,
+                            ),
+                            Center(
+                                child: Text(
+                              restTime.toString(),
+                              style: Theme.of(context).textTheme.titleLarge,
+                            )).paddingTop(6.5.w)
+                          ],
                         )
                       : ElevatedButton.icon(
                           onPressed: () {
@@ -101,23 +111,35 @@ class _ActiveClassScreenState extends State<ActiveClassScreen> {
                                       .restTime ??
                                   0;
                               inRestTime = true;
+
                               Future.delayed(restTime.seconds, () {
                                 inRestTime = false;
-                                if ((currentStep + 1) ==
-                                    (widget
-                                            .activeClass
-                                            .classWorkouts?[currentWorkout]
-                                            .repeat ??
-                                        0)) {
-                                  currentStep = 0;
-                                  currentWorkout++;
+                                if (checkCurrentWorkoutLength()) {
+                                  if (checkCurrentStep()) {
+                                    if (checkIfNotLastWorkout()) {
+                                      currentStep = 0;
+                                      currentWorkout++;
+                                    }
+                                  } else {
+                                    if (checkIfNotLastWorkoutAndLastStep()) {
+                                      currentStep++;
+                                    }
+                                  }
                                 }
-                                currentStep++;
+                              });
+                            });
+                            Timer.periodic(1.seconds, (Timer t) {
+                              setState(() {
+                                if (restTime > 0) {
+                                  restTime--;
+                                } else {
+                                  t.cancel();
+                                }
                               });
                             });
                           },
                           icon: Icon(Icons.navigate_next_rounded),
-                          label: Text('Next')),
+                          label: Text('Next Set')),
                 ).paddingVertical(2.h),
                 WorkoutDetailsScreen(
                   workout:
@@ -129,5 +151,27 @@ class _ActiveClassScreenState extends State<ActiveClassScreen> {
         ),
       ),
     );
+  }
+
+  bool checkCurrentStep() {
+    return (currentStep + 1) ==
+        (widget.activeClass.classWorkouts?[currentWorkout].repeat ?? 0);
+  }
+
+  bool checkCurrentWorkoutLength() {
+    return ((currentWorkout + 1) <=
+        (widget.activeClass.classWorkouts?.length ?? 0));
+  }
+
+  bool checkIfNotLastWorkout() {
+    return ((currentWorkout + 1) !=
+        (widget.activeClass.classWorkouts?.length ?? 0));
+  }
+
+  bool checkIfNotLastWorkoutAndLastStep() {
+    return ((currentWorkout + 1) !=
+            (widget.activeClass.classWorkouts?.length ?? 0) ||
+        (currentStep + 1) !=
+            (widget.activeClass.classWorkouts?[currentWorkout].repeat ?? 0));
   }
 }

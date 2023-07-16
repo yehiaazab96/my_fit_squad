@@ -48,17 +48,11 @@ dependencies:
   easy_sidemenu: ^0.4.1
   flutter_animate: ^4.1.1+1
   google_fonts: ^5.0.0
-  video_player: 
+  video_player:
   image_picker: ^0.8.9
-  health: 
+  health:
   calendar_timeline: ^1.1.2
   flutter_rating_bar: ^4.0.1
-
-
-
-
-
-
 
 dev_dependencies:
   flutter_test:

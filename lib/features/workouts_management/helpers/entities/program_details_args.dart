@@ -2,7 +2,8 @@ import 'package:my_fit_squad/features/workouts_management/data/model/program.dar
 
 class ProgramDetailsArgs {
   Program? program;
-  String? startDate;
+  String? startDateString;
+  DateTime? startDate;
 
-  ProgramDetailsArgs({this.program, this.startDate});
+  ProgramDetailsArgs({this.program, this.startDateString, this.startDate});
 }

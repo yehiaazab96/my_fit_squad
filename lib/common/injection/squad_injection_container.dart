@@ -6,6 +6,8 @@ import 'package:my_fit_squad/features/coaches_clients_management/presentation/gl
 import 'package:my_fit_squad/features/coaches_clients_management/presentation/global_states/coaches_state.dart';
 import 'package:my_fit_squad/features/coaches_clients_management/presentation/view_models/clients_view_model.dart';
 import 'package:my_fit_squad/features/coaches_clients_management/presentation/view_models/coaches_view_model.dart';
+import 'package:my_fit_squad/features/user_management/presentation/global_states/profile_state.dart';
+import 'package:my_fit_squad/features/user_management/presentation/view_models/assign_program_view_model.dart';
 
 final squadNetworkDataSourceProvider =
     Provider<CoachesAndClientsNetworkDataSource>((ref) {
@@ -28,6 +30,14 @@ final coachesViewModelProvider =
 final clientsViewModelProvider =
     StateNotifierProvider<ClientsViewModl, BaseState<Clientstate>>((ref) {
   return ClientsViewModl(
+    ref.read(squadRepositoryProvider),
+  );
+});
+
+final assignProgramViewModelProvider =
+    StateNotifierProvider<AssignProgramViewModel, BaseState<ProfileState>>(
+        (ref) {
+  return AssignProgramViewModel(
     ref.read(squadRepositoryProvider),
   );
 });

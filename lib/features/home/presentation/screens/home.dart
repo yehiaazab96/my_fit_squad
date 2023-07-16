@@ -124,20 +124,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            Container(
-              width: 100.w,
-              height: 5.h,
-              margin: EdgeInsets.symmetric(vertical: 2.h),
-              child: ElevatedButton(
-                child: Text("log out".tr(),
-                    style: Theme.of(context).textTheme.bodyMedium),
-                onPressed: () {
-                  ProviderScope.containerOf(context)
-                      .read(userProvider.notifier)
-                      .signout();
-                },
-              ),
-            ),
           ]),
     );
   }

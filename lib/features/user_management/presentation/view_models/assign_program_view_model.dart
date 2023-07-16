@@ -5,31 +5,33 @@ import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_state.dart';
 import 'package:my_fit_squad/features/base/presentation/view_models/base_view_model.dart';
+import 'package:my_fit_squad/features/coaches_clients_management/data/repositories/coaches_clients_repository_impl.dart';
 import 'package:my_fit_squad/features/user_management/data/model/user_model.dart';
 import 'package:my_fit_squad/features/user_management/data/repositories/user_repository_impl.dart';
 import 'package:my_fit_squad/features/user_management/presentation/global_states/profile_state.dart';
+import 'package:my_fit_squad/features/workouts_management/data/model/program.dart';
 
-class ProfileViewModel extends StateNotifier<BaseState<ProfileState>>
+class AssignProgramViewModel extends StateNotifier<BaseState<ProfileState>>
     with BaseViewModel {
-  final UserRepositoryImpl _userRepositoryImpl;
+  final CoachesAndClientsRepositoryImpl _repositoryImpl;
 
-  ProfileViewModel(this._userRepositoryImpl)
+  AssignProgramViewModel(this._repositoryImpl)
       : super(BaseState(data: ProfileState()));
 
-  getUserProfile() async {
+  updateClientProgram(
+      Program program, String startDate, String ClientID) async {
     hideKeyboard();
     var user = ProviderScope.containerOf(Constants.navigatorKey.currentContext!)
         .read(userProvider);
 
     state = state.copyWith(isLoading: true);
-    BaseApiResult<User> result =
-        await _userRepositoryImpl.getUserProfile(user?.userId ?? '');
+    BaseApiResult<User> result = await _repositoryImpl.updateClientWithProgram(
+        program, startDate, ClientID);
     if (result.data != null) {
-      var temp = result.data;
-      temp?.accessToken = user?.accessToken;
-      ProviderScope.containerOf(Constants.navigatorKey.currentContext!)
-          .read(userProvider.notifier)
-          .setState(temp);
+      showToastMessage('Client updated with program');
+      ProviderScope.containerOf(Constants.profileNavigatorKey.currentContext!)
+          .read(profileViewModelProvider.notifier)
+          .pop();
     } else {
       if (result.apiErrors != null) {
         showToastMessage(result.errorMessage ?? "Something went wrong");
@@ -38,16 +40,5 @@ class ProfileViewModel extends StateNotifier<BaseState<ProfileState>>
       }
     }
     state = state.copyWith(isLoading: false);
-  }
-
-  void navigateTo(String routeName, {arguments, Function? onReturn}) async {
-    navigateToScreenNamed(routeName,
-        arguments: arguments,
-        onReturn: onReturn,
-        navigatorKey: Constants.profileNavigatorKey);
-  }
-
-  void pop({onPop}) {
-    Constants.profileNavigatorKey.currentState!.pop(onPop);
   }
 }

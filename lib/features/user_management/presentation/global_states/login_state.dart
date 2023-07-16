@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_fit_squad/features/base/data/models/forms_errors.dart';
 import 'package:my_fit_squad/features/user_management/data/model/user_model.dart';

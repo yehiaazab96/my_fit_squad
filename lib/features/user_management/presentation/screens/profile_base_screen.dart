@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_fit_squad/common/constants/constants.dart';
-import 'package:my_fit_squad/features/home/utils/home_route_generator.dart';
 import 'package:my_fit_squad/features/user_management/utils/profile_route_generator.dart';
 
 class ProfileBaseScreen extends StatefulWidget {

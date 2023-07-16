@@ -14,7 +14,7 @@ class ProgramsViewModel extends StateNotifier<BaseState<ProgramsState>>
   ProgramsViewModel(this._workoutsRepositoryImpl)
       : super(BaseState(data: ProgramsState()));
 
-  getPrograms() async {
+  Future<List<Program>?> getPrograms() async {
     hideKeyboard();
 
     state = state.copyWith(isLoading: true);
@@ -23,6 +23,9 @@ class ProgramsViewModel extends StateNotifier<BaseState<ProgramsState>>
     if (result.data != null) {
       print(result.data);
       state = state.copyWith(data: state.data.copyWith(programs: result.data));
+      state = state.copyWith(isLoading: false);
+
+      return result.data;
     } else {
       if (result.apiErrors != null) {
         showToastMessage(result.errorMessage ?? "Something went wrong");
