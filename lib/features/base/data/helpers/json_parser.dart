@@ -10,6 +10,7 @@ extension JsonParser on Map<String, dynamic> {
     switch (V) {
       case User:
         return User.fromJson(this) as V;
+
       case ResponseMessage:
         return ResponseMessage.fromJson(this) as V;
       case Workout:

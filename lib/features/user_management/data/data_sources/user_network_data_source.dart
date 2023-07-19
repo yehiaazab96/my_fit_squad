@@ -8,6 +8,7 @@ import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/common/constants/constants.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
+import 'package:my_fit_squad/features/user_management/data/model/message.dart';
 import 'package:my_fit_squad/features/user_management/data/model/user_model.dart';
 
 class UserNetworkDataSource {
@@ -33,6 +34,14 @@ class UserNetworkDataSource {
         ApiUrls.user + ApiUrls.signup,
         hasToken: false,
         data: formdata);
+  }
+
+  Future<BaseApiResult<ResponseMessage>> validateCode(
+      {required String code, required String id}) async {
+    return await ApiMethods<ResponseMessage>().post(
+        ApiUrls.user + ApiUrls.validateCode,
+        hasToken: true,
+        data: {'code': code, 'id': id});
   }
 
   Future<BaseApiResult<User>> getUser(String id) async {

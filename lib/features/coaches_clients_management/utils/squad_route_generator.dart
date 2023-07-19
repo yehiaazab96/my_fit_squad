@@ -4,7 +4,7 @@ import 'package:my_fit_squad/features/coaches_clients_management/presentation/sc
 
 class SquadRouteGenerator {
   static generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    // final args = settings.arguments;
     final name = settings.name;
 
     switch (name) {

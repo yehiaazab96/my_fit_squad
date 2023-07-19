@@ -9,6 +9,7 @@ class ApiUrls {
 
   static const login = '/login';
   static const signup = '/signup';
+  static const validateCode = '/validate-code';
 
   static const coaches = '/coaches';
   static const clients = '/clients';
@@ -20,6 +21,7 @@ class ApiUrls {
 
   //workouts
   static const workouts = '/workouts';
+  static const media = '/workouts/media/';
 
   //classes
   static const classes = '/days';

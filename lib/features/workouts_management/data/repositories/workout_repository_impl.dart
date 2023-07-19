@@ -1,4 +1,6 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
+import 'package:my_fit_squad/features/user_management/data/model/message.dart';
 import 'package:my_fit_squad/features/workouts_management/data/data_sources/workout_network_data_source.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/class_data.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/program.dart';
@@ -24,6 +26,11 @@ class WorkoutRepositoryImpl {
 
   Future<BaseApiResult<Workout>> addWorkout({required WorkoutData data}) async {
     return await networkDataSource.addWorkout(data: data);
+  }
+
+  Future<BaseApiResult<ResponseMessage>> updateWorkoutWithMedia(
+      {required String id, required List<XFile> files}) async {
+    return networkDataSource.updateWorkoutWithMedia(id: id, files: files);
   }
 
   Future<BaseApiResult<List<Class>>> getClasses() async {

@@ -2,16 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:my_fit_squad/app_init.dart';
 import 'package:my_fit_squad/app_route_generator.dart';
 import 'package:my_fit_squad/common/constants/constants.dart';
-import 'package:my_fit_squad/common/utils/app_locales.dart';
-import 'package:my_fit_squad/features/base/presentation/screens/base_screen.dart';
-import 'package:my_fit_squad/features/user_management/data/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_fit_squad/features/user_management/presentation/screens/login.dart';
-import 'package:my_fit_squad/route_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import './common/injection/injection_container.dart' as di;
 
 import 'common/utils/app_theme.dart';
 

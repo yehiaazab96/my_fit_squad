@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:health/health.dart';
-import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/common/utils/health_info.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/app_loader.dart';
+import 'package:my_fit_squad/features/base/presentation/widgets/app_network_image.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/column_row.dart';
 import 'package:my_fit_squad/features/home/presentation/widgets/category_container.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -49,8 +49,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     children: [
                       CircleAvatar(
-                        foregroundImage: NetworkImage(
-                            '${ApiUrls.baseImageUrl}${ApiUrls.users}/${user?.profileImage ?? ''}'),
+                        radius: 2.5.h,
+                        child: ClipOval(
+                          child: SizedBox(
+                            width: 10.h,
+                            height: 10.h,
+                            child: AppNetworkImage(
+                              hasToken: true,
+                              url: user?.profileImage ?? '',
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(
                         width: 5.w,

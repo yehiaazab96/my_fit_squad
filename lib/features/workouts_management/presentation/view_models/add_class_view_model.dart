@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_fit_squad/common/api/api_error_type.dart';
 import 'package:my_fit_squad/common/constants/constants.dart';

@@ -162,6 +162,25 @@ class ApiMethods<T> {
     }
   }
 
+  Future<BaseApiResult<T>> patchWithFormData(String url,
+      {required FormData data,
+      bool hasToken = true,
+      bool cache = false,
+      bool isWPApi = false}) async {
+    try {
+      Response response = await ApiConfig.dio.patch(url,
+          data: data,
+          options:
+              getOptions(cache: cache, hasToken: hasToken, isWPApi: isWPApi));
+
+      print(response.toString());
+      return _handleResponse(response);
+    } on DioError catch (error) {
+      print(error);
+      return _catchError(error);
+    }
+  }
+
   Options getOptions(
       {bool cache = false, bool hasToken = true, bool isWPApi = false}) {
     Map<String, dynamic> extras = {};

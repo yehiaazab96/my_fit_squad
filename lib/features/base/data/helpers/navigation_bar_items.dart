@@ -131,16 +131,23 @@ enum NavigationBarItem {
   Widget? get currentFloatinActionButton {
     switch (this) {
       case workouts:
-        return FloatingActionButton(
-          onPressed: () {
-            ProviderScope.containerOf(
-                    Constants.workoutsNavigtorKey.currentContext!)
-                .read(workoutScreenViewModelProvider.notifier)
-                .navigateToAddScreen();
-          },
-          shape: const CircleBorder(),
-          child: const Icon(Icons.add),
-        );
+        return Consumer(builder: (_, ref, __) {
+          var screen = ref.watch(workoutScreenViewModelProvider).screen;
+          return screen != WorkoutScreenType.other
+              ? FloatingActionButton(
+                  onPressed: () {
+                    ProviderScope.containerOf(
+                            Constants.workoutsNavigtorKey.currentContext!)
+                        .read(workoutScreenViewModelProvider.notifier)
+                        .navigateToAddScreen();
+                  },
+                  shape: const CircleBorder(),
+                  child: const Icon(Icons.add),
+                )
+              : Container(
+                  height: 0.h,
+                );
+        });
 
       default:
         return null;

@@ -101,7 +101,7 @@ class User {
     data['experince_years'] = experinceYears;
     data['coach_code'] = coachCode;
     data['profile_img'] = profileImage;
-    data['request_pending'] = requestPending;
+    data['request_pending'] = requestPending ?? true;
     data['join_requests'] = joinRequests;
     data['clients'] = clients;
     data['current_program'] = currentProgram?.toJson();

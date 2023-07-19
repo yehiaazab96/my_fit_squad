@@ -2,6 +2,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
 import 'package:my_fit_squad/features/user_management/data/data_sources/user_locale_data_source.dart';
 import 'package:my_fit_squad/features/user_management/data/data_sources/user_network_data_source.dart';
+import 'package:my_fit_squad/features/user_management/data/model/message.dart';
 import 'package:my_fit_squad/features/user_management/data/model/user_model.dart';
 
 class UserRepositoryImpl {
@@ -20,6 +21,11 @@ class UserRepositoryImpl {
 
   Future<BaseApiResult<User>> signUp(User user, {XFile? profileImage}) async {
     return await networkDataSource.signUp(user, profileImage: profileImage);
+  }
+
+  Future<BaseApiResult<ResponseMessage>> validateCode(
+      {required String code, required String id}) async {
+    return await networkDataSource.validateCode(code: code, id: id);
   }
 
   Future<void> setLocalUserProfile(User? userData) async {

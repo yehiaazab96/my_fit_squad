@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/common/constants/constants.dart';
 import 'package:my_fit_squad/common/extensions/widget_extensions.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
@@ -225,8 +224,10 @@ class _AddProgramScreenState extends State<AddProgramScreen> {
                                           children: [
                                             Positioned.fill(
                                               child: AppNetworkImage(
-                                                url:
-                                                    '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${e.classWorkouts?.first.workout?.image ?? ''}',
+                                                hasToken: true,
+                                                url: e.classWorkouts?.first
+                                                        .workout?.image ??
+                                                    '',
                                               ),
                                             ),
                                             Positioned(

@@ -34,6 +34,7 @@ class ClassesViewModel extends StateNotifier<BaseState<ClassesState>>
       }
     }
     state = state.copyWith(isLoading: false);
+    return null;
   }
 
   addClassToList(Class cls) {

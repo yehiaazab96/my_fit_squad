@@ -34,6 +34,7 @@ class ProgramsViewModel extends StateNotifier<BaseState<ProgramsState>>
       }
     }
     state = state.copyWith(isLoading: false);
+    return null;
   }
 
   addProgramToList(Program program) {

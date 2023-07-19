@@ -10,7 +10,7 @@ class MessageModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['messgae'] = this.messgae;
+    data['message'] = this.messgae;
     return data;
   }
 }

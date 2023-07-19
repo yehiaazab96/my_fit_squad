@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/common/extensions/widget_extensions.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/common/injection/squad_injection_container.dart';
@@ -69,8 +68,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 CircleAvatar(
                   radius: 8.h,
-                  foregroundImage: NetworkImage(
-                      '${ApiUrls.baseImageUrl}${ApiUrls.users}/${user?.profileImage ?? ''}'),
+                  child: ClipOval(
+                    child: SizedBox(
+                      width: 16.h,
+                      height: 16.h,
+                      child: AppNetworkImage(
+                        url: user?.profileImage ?? '',
+                        hasToken: true,
+                      ),
+                    ),
+                  ),
                 ).paddingBottom(2.h),
                 Text(
                   "${user?.firstName ?? ""} ${user?.lastName ?? ''}",
@@ -138,7 +145,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ],
                           ).paddingBottom(1.h),
-                          if (user.currentProgram != null)
+                          if (user.currentProgram != null &&
+                              user.currentProgram!.program != null &&
+                              user.currentProgram!.program!.classes!.isNotEmpty)
                             Expanded(
                                 child: ProgramWidget(
                               program: user.currentProgram!.program,
@@ -232,9 +241,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           child: SizedBox(
                                             width: 10.h,
                                             child: AppNetworkImage(
-                                              url:
-                                                  '${ApiUrls.baseImageUrl}${ApiUrls.users}/${coachClients[index].profileImage ?? ''}',
-                                            ),
+                                                hasToken: true,
+                                                url: coachClients[index]
+                                                        .profileImage ??
+                                                    ''),
                                           ),
                                         ),
                                       ),
@@ -418,7 +428,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 5.h,
                   margin: EdgeInsets.symmetric(vertical: 2.h),
                   child: ElevatedButton(
-                    child: Text("log out".tr(),
+                    child: Text("Log out".tr(),
                         style: Theme.of(context).textTheme.bodyMedium),
                     onPressed: () {
                       ProviderScope.containerOf(context)

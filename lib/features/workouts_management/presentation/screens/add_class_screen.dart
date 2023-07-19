@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/common/extensions/widget_extensions.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_state.dart';
@@ -127,8 +126,8 @@ class _AddClassScreenState extends State<AddClassScreen> {
                                   children: [
                                     Positioned.fill(
                                       child: AppNetworkImage(
-                                        url:
-                                            '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${e.image ?? ''}',
+                                        hasToken: true,
+                                        url: e.image ?? '',
                                       ),
                                     ),
                                     Positioned(
@@ -238,8 +237,8 @@ class _AddClassScreenState extends State<AddClassScreen> {
                               children: [
                                 Positioned.fill(
                                   child: AppNetworkImage(
-                                    url:
-                                        '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${e.workout?.image ?? ''}',
+                                    hasToken: true,
+                                    url: e.workout?.image ?? '',
                                   ),
                                 ),
                                 Positioned(

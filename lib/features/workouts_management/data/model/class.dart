@@ -1,6 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_fit_squad/common/constants/constants.dart';
-import 'package:my_fit_squad/common/injection/user_injection_container.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/class_workout.dart';
 
 class Class {

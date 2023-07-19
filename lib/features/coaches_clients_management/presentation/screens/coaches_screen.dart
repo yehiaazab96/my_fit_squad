@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/common/extensions/widget_extensions.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/common/injection/squad_injection_container.dart';
@@ -67,8 +66,8 @@ class _CoachesScreenState extends State<CoachesScreen> {
                                         child: SizedBox(
                                           width: 10.h,
                                           child: AppNetworkImage(
-                                            url:
-                                                '${ApiUrls.baseImageUrl}${ApiUrls.users}/${e.profileImage ?? ''}',
+                                            hasToken: true,
+                                            url: e.profileImage ?? '',
                                           ),
                                         ),
                                       ),
@@ -165,25 +164,24 @@ class _CoachesScreenState extends State<CoachesScreen> {
                                                                 coachID:
                                                                     e.userId,
                                                                 status:
-                                                                    !(requestPending ??
-                                                                        false),
+                                                                    !(requestPending),
                                                                 onreturn: () {
                                                                   setState(
                                                                       () {});
                                                                 });
                                                       },
                                                       style: ElevatedButton.styleFrom(
-                                                          backgroundColor: (requestPending ??
-                                                                  false)
-                                                              ? Theme.of(context)
+                                                          backgroundColor: (requestPending)
+                                                              ? Theme.of(
+                                                                      context)
                                                                   .colorScheme
                                                                   .onTertiary
-                                                              : Theme.of(context)
+                                                              : Theme.of(
+                                                                      context)
                                                                   .colorScheme
                                                                   .secondary),
                                                       child: Text(
-                                                              (requestPending ??
-                                                                      false)
+                                                              (requestPending)
                                                                   ? 'Cancel'
                                                                   : 'Join',
                                                               textAlign:

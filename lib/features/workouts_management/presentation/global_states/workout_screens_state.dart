@@ -1,4 +1,3 @@
-import 'package:my_fit_squad/features/workouts_management/data/model/class.dart';
 import 'package:my_fit_squad/features/workouts_management/helpers/workout_screen_type.dart';
 
 class WorkoutsScreensState {

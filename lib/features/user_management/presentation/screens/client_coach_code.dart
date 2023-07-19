@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_fit_squad/common/constants/colors.dart';
+import 'package:my_fit_squad/common/constants/constants.dart';
 import 'package:my_fit_squad/common/extensions/widget_extensions.dart';
+import 'package:my_fit_squad/common/injection/user_injection_container.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_state.dart';
 import 'package:my_fit_squad/features/base/data/models/forms_errors.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/app_text_field.dart';
@@ -82,7 +84,22 @@ class _ClientCoachCodeState extends State<ClientCoachCode>
                     backgroundColor: Theme.of(context).colorScheme.secondary),
                 child: Text("Join Coach Squad".tr(),
                     style: Theme.of(context).textTheme.bodyLarge),
-                onPressed: () {},
+                onPressed: () {
+                  var user =
+                      ProviderScope.containerOf(context).read(userProvider);
+                  if (user?.accessToken != null) {
+                    print(user?.accessToken);
+                    ProviderScope.containerOf(context)
+                        .read(widget.provider.notifier)
+                        .validateCode(
+                            code: _coachCodeController.text,
+                            id: user!.userId ?? '');
+                  } else {
+                    ProviderScope.containerOf(context)
+                        .read(widget.provider.notifier)
+                        .validateCodeAndSignUp(code: _coachCodeController.text);
+                  }
+                },
               ),
             ),
             Container(
@@ -95,9 +112,15 @@ class _ClientCoachCodeState extends State<ClientCoachCode>
                 child: Text("Skip".tr(),
                     style: Theme.of(context).textTheme.bodyLarge),
                 onPressed: () {
-                  ProviderScope.containerOf(context)
-                      .read(widget.provider.notifier)
-                      .signup(code: _coachCodeController.text);
+                  var user =
+                      ProviderScope.containerOf(context).read(userProvider);
+                  if (user?.accessToken != null) {
+                    Navigator.of(Constants.navigatorKey.currentContext!).pop();
+                  } else {
+                    ProviderScope.containerOf(context)
+                        .read(widget.provider.notifier)
+                        .signup(code: _coachCodeController.text);
+                  }
                 },
               ),
             ),

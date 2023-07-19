@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_fit_squad/features/coaches_clients_management/presentation/screens/squad_screen.dart';
 import 'package:my_fit_squad/features/user_management/presentation/screens/join_us.dart';
 import 'package:my_fit_squad/route_screen.dart';
 

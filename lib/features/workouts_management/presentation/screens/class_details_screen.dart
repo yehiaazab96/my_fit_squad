@@ -229,8 +229,8 @@ class ClassDetailsScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(1.w),
                                           child: AppNetworkImage(
-                                            url:
-                                                '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${e.workout?.image ?? ''}',
+                                            hasToken: true,
+                                            url: e.workout?.image ?? '',
                                           ),
                                         ),
                                       ),

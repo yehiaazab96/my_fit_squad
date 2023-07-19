@@ -1,10 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_fit_squad/common/api/api_error_type.dart';
 import 'package:my_fit_squad/common/constants/constants.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_state.dart';
 import 'package:my_fit_squad/features/base/presentation/view_models/base_view_model.dart';
+import 'package:my_fit_squad/features/user_management/data/model/message.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/workout.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/workout_data.dart';
 import 'package:my_fit_squad/features/workouts_management/data/repositories/workout_repository_impl.dart';
@@ -51,5 +53,30 @@ class AddWorkoutViewModel extends StateNotifier<BaseState<AddWorkoutState>>
       }
       state = state.copyWith(isLoading: false);
     }
+  }
+
+  Future<String?> updateWorkoutWithMedia(
+      {required String id, required List<XFile> files}) async {
+    hideKeyboard();
+
+    if (state.data.errors.isEmpty) {
+      state = state.copyWith(isLoading: true);
+      BaseApiResult<ResponseMessage> result = await _workoutsRepositoryImpl
+          .updateWorkoutWithMedia(id: id, files: files);
+      if (result.data != null) {
+        return result.data?.message ?? '';
+        // ProviderScope.containerOf(Constants.workoutsNavigtorKey.currentContext!)
+        //     .read(workoutScreenViewModelProvider.notifier)
+        //     .pop();
+      } else {
+        if (result.apiErrors != null) {
+          showToastMessage(result.errorMessage ?? "Something went wrong");
+        } else {
+          handleError(errorType: result.errorType ?? ApiErrorType.generalError);
+        }
+      }
+      state = state.copyWith(isLoading: false);
+    }
+    return null;
   }
 }

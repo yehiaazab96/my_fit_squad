@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_fit_squad/common/api/api_urls.dart';
 import 'package:my_fit_squad/common/injection/workouts_injection_container.dart';
 import 'package:my_fit_squad/features/base/presentation/widgets/app_network_image.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/program.dart';
@@ -43,8 +42,10 @@ class ProgramWidget extends StatelessWidget {
           children: [
             Positioned.fill(
                 child: AppNetworkImage(
-              url:
-                  '${ApiUrls.baseImageUrl}${ApiUrls.workouts}/${program?.classes?.first.cls?.classWorkouts?.first.workout?.image ?? ''}',
+              hasToken: true,
+              url: program?.classes?.first.cls?.classWorkouts?.first.workout
+                      ?.image ??
+                  '',
             )),
             Positioned(
                 bottom: 0,

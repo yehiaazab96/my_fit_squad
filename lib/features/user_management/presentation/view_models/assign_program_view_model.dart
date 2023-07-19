@@ -2,12 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_fit_squad/common/api/api_error_type.dart';
 import 'package:my_fit_squad/common/constants/constants.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
+import 'package:my_fit_squad/common/injection/squad_injection_container.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_state.dart';
 import 'package:my_fit_squad/features/base/presentation/view_models/base_view_model.dart';
 import 'package:my_fit_squad/features/coaches_clients_management/data/repositories/coaches_clients_repository_impl.dart';
 import 'package:my_fit_squad/features/user_management/data/model/user_model.dart';
-import 'package:my_fit_squad/features/user_management/data/repositories/user_repository_impl.dart';
 import 'package:my_fit_squad/features/user_management/presentation/global_states/profile_state.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/program.dart';
 
@@ -21,14 +21,17 @@ class AssignProgramViewModel extends StateNotifier<BaseState<ProfileState>>
   updateClientProgram(
       Program program, String startDate, String ClientID) async {
     hideKeyboard();
-    var user = ProviderScope.containerOf(Constants.navigatorKey.currentContext!)
-        .read(userProvider);
+    // var user = ProviderScope.containerOf(Constants.navigatorKey.currentContext!)
+    //     .read(userProvider);
 
     state = state.copyWith(isLoading: true);
     BaseApiResult<User> result = await _repositoryImpl.updateClientWithProgram(
         program, startDate, ClientID);
     if (result.data != null) {
       showToastMessage('Client updated with program');
+      ProviderScope.containerOf(Constants.profileNavigatorKey.currentContext!)
+          .read(clientsViewModelProvider.notifier)
+          .getClients();
       ProviderScope.containerOf(Constants.profileNavigatorKey.currentContext!)
           .read(profileViewModelProvider.notifier)
           .pop();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_fit_squad/common/api/api_error_type.dart';
@@ -8,6 +9,7 @@ import 'package:my_fit_squad/common/utils/random_string_genartor.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_api_result.dart';
 import 'package:my_fit_squad/features/base/data/helpers/base_state.dart';
 import 'package:my_fit_squad/features/base/presentation/view_models/base_view_model.dart';
+import 'package:my_fit_squad/features/user_management/data/model/message.dart';
 import 'package:my_fit_squad/features/user_management/data/model/user_model.dart';
 import 'package:my_fit_squad/features/user_management/data/repositories/user_repository_impl.dart';
 import 'package:my_fit_squad/features/user_management/helpers/coach_package.dart';
@@ -25,15 +27,8 @@ class JoinUsViewModel extends StateNotifier<BaseState<SignUpState>>
 
   signup({String? code}) async {
     hideKeyboard();
-    print(state.data.user?.email);
-    if (state.data.currentStep == JoinUsSteps.clientCoachCode) {
-      state = state.copyWith(
-          data: state.data
-              .copyWith(user: (state.data.user!).copyWith(coachCode: code)));
-    }
 
     state = state.copyWith(isLoading: true);
-
     BaseApiResult<User> result = await _userRepositoryImpl
         .signUp(state.data.user!, profileImage: state.data.profileImage);
     if (result.data != null) {
@@ -119,5 +114,50 @@ class JoinUsViewModel extends StateNotifier<BaseState<SignUpState>>
     state = state.copyWith(
         data: state.data.copyWith(
             user: (state.data.user!).copyWith(subscribtionPlan: plan)));
+  }
+
+  validateCodeAndSignUp({required String code}) async {
+    hideKeyboard();
+
+    if (state.data.currentStep == JoinUsSteps.clientCoachCode) {
+      state = state.copyWith(
+          data: state.data
+              .copyWith(user: (state.data.user!).copyWith(coachCode: code)));
+    }
+
+    state = state.copyWith(isLoading: true);
+
+    BaseApiResult<User> result = await _userRepositoryImpl
+        .signUp(state.data.user!, profileImage: state.data.profileImage);
+    if (result.data != null) {
+      print(result.data?.accessToken);
+
+      ProviderScope.containerOf(Constants.navigatorKey.currentContext!)
+          .read(userProvider.notifier)
+          .setState(result.data);
+
+      Future.delayed(0.5.seconds, () async {
+        validateCode(code: code, id: result.data?.userId ?? '');
+      });
+    } else {
+      if (result.apiErrors != null) {
+        showToastMessage(result.errorMessage ?? "Something went wrong");
+      } else {
+        handleError(errorType: result.errorType ?? ApiErrorType.generalError);
+      }
+    }
+    state = state.copyWith(isLoading: false);
+  }
+
+  validateCode({required String code, required String id}) async {
+    BaseApiResult<ResponseMessage> resultMessage =
+        await _userRepositoryImpl.validateCode(code: code, id: id);
+
+    if (resultMessage.data != null) {
+      showToastMessage(resultMessage.data?.message ?? '');
+      Navigator.of(Constants.navigatorKey.currentContext!).pop();
+    } else {
+      showToastMessage('Code not valid');
+    }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/class.dart';
-import 'package:my_fit_squad/features/workouts_management/data/model/program.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/workout.dart';
 import 'package:my_fit_squad/features/workouts_management/helpers/entities/program_details_args.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/screens/add_class_screen.dart';

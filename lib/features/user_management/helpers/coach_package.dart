@@ -66,7 +66,7 @@ enum CoachPackages {
   }
 
   static CoachPackages fromString(String? plan) {
-    switch (plan) {
+    switch ((plan ?? '').toLowerCase()) {
       case 'free':
         return CoachPackages.free;
       case 'silver':
