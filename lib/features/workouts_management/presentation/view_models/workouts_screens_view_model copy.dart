@@ -16,7 +16,8 @@ class WorkoutsScreensViewModel extends StateNotifier<WorkoutsScreensState>
     state = state.copyWith(screen: type);
   }
 
-  void navigateTo(String routeName, {arguments, Function? onReturn}) async {
+  void navigateTo(String routeName,
+      {arguments, Function? onReturn, WorkoutScreenType? screenType}) async {
     state = state.copyWith(returnScreen: state.screen);
     changeCurrentScreen(WorkoutScreenType.other);
     navigateToScreenNamed(routeName,
@@ -25,9 +26,11 @@ class WorkoutsScreensViewModel extends StateNotifier<WorkoutsScreensState>
         navigatorKey: Constants.workoutsNavigtorKey);
   }
 
-  void pop({onPop}) {
-    changeCurrentScreen(state.returnScreen ?? WorkoutScreenType.workouts);
+  bool pop({onPop, WorkoutScreenType? type}) {
+    changeCurrentScreen(
+        type ?? (state.returnScreen ?? WorkoutScreenType.workouts));
     Constants.workoutsNavigtorKey.currentState!.pop(onPop);
+    return true;
   }
 
   navigateToAddScreen() {

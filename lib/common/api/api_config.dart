@@ -15,7 +15,7 @@ class ApiConfig {
   static Dio dio = createDio();
 
   static final Dio _refreshDio = Dio(BaseOptions(
-      connectTimeout: 10000, receiveTimeout: 10000, baseUrl: ApiUrls.baseUrl));
+      connectTimeout: 20000, receiveTimeout: 20000, baseUrl: ApiUrls.baseUrl));
 
   static DioCacheManager dioCacheManager = DioCacheManager(CacheConfig(
     baseUrl: ApiUrls.baseUrl,
@@ -25,7 +25,7 @@ class ApiConfig {
 
   static Dio createDio() {
     var dio = Dio(BaseOptions(
-        connectTimeout: 10000, receiveTimeout: 10000, baseUrl: ApiUrls.baseUrl))
+        connectTimeout: 20000, receiveTimeout: 20000, baseUrl: ApiUrls.baseUrl))
       ..interceptors.addAll([AppInterceptor(), dioCacheManager.interceptor]);
     // if (kIsWeb) {}
     return dio;

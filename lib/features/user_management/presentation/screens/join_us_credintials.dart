@@ -48,137 +48,153 @@ class _JoinUsCredintialsState extends State<JoinUsCredintials>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
-                  'Enter Email and Password \n to Proceed',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleLarge,
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    'Enter Email and Password \n to Proceed',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ).paddingTop(3.h),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Consumer(builder: (_, ref, __) {
-                      List<BaseFormError> errors =
-                          ref.watch(widget.provider).data.errors;
-                      int errorIndex = errors.indexWhere(
-                          (error) => error.field == UserFieldType.email.field);
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppTextField(
-                            controller: _userNameController,
-                            inputType: TextInputType.emailAddress,
-                            label: 'email'.tr(),
-                            prefix: Icon(
-                              Icons.person,
-                              color: AppColors.white,
-                            ),
-                            errorText: (errorIndex != -1) ? "" : null,
-                          ).paddingBottom(0),
-                          (errorIndex != -1)
-                              ? AppTextFieldErrorText(
-                                  errorText: errors[errorIndex].message ?? "",
-                                )
-                              : const SizedBox()
-                        ],
-                      ).paddingBottom(10);
-                    }),
-                    Consumer(builder: (_, ref, __) {
-                      bool showPassword = ref.watch(_showPasswordProvider);
-                      List<BaseFormError> errors =
-                          ref.watch(widget.provider).data.errors;
-                      int errorIndex = errors.indexWhere((error) =>
-                          error.field == UserFieldType.password.field);
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppTextField(
-                            controller: _passwordController,
-                            label: 'Password'.tr(),
-                            prefix: Icon(
-                              Icons.key,
-                              color: AppColors.white,
-                            ),
-                            suffix: !showPassword
-                                ? InkWell(
-                                    onTap: () {
-                                      ref
-                                          .watch(_showPasswordProvider.notifier)
-                                          .state = true;
-                                    },
-                                    child: Icon(
-                                      Icons.remove_red_eye,
-                                      color: AppColors.white,
-                                    ))
-                                : InkWell(
-                                    onTap: () {
-                                      ref
-                                          .watch(_showPasswordProvider.notifier)
-                                          .state = false;
-                                    },
-                                    child: Icon(
-                                      Icons.remove_red_eye_outlined,
-                                      color: AppColors.white,
-                                    )),
-                            isSecured: !showPassword,
-                            errorText: (errorIndex != -1) ? "" : null,
-                          ).paddingBottom(0),
-                          (errorIndex != -1)
-                              ? AppTextFieldErrorText(
-                                  errorText: errors[errorIndex].message ?? "",
-                                )
-                              : const SizedBox()
-                        ],
-                      ).paddingBottom(10);
-                    }),
-                    Consumer(builder: (_, ref, __) {
-                      bool showPassword = ref.watch(_showPasswordProvider);
-                      List<BaseFormError> errors =
-                          ref.watch(widget.provider).data.errors;
-                      int errorIndex = errors.indexWhere((error) =>
-                          error.field == UserFieldType.confirmPassword.field);
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppTextField(
-                            controller: _confirmPasswordController,
-                            label: 'confirm_password'.tr(),
-                            prefix: Icon(
-                              Icons.key,
-                              color: AppColors.white,
-                            ),
-                            suffix: !showPassword
-                                ? InkWell(
-                                    onTap: () {
-                                      ref
-                                          .watch(_showPasswordProvider.notifier)
-                                          .state = true;
-                                    },
-                                    child: Icon(
-                                      Icons.remove_red_eye,
-                                      color: AppColors.white,
-                                    ))
-                                : InkWell(
-                                    onTap: () {
-                                      ref
-                                          .watch(_showPasswordProvider.notifier)
-                                          .state = false;
-                                    },
-                                    child: Icon(
-                                      Icons.remove_red_eye_outlined,
-                                      color: AppColors.white,
-                                    )),
-                            isSecured: !showPassword,
-                            errorText: (errorIndex != -1) ? "" : null,
-                          ).paddingBottom(0),
-                          (errorIndex != -1)
-                              ? AppTextFieldErrorText(
-                                  errorText: errors[errorIndex].message ?? "",
-                                )
-                              : const SizedBox()
-                        ],
-                      ).paddingBottom(10);
-                    }),
-                  ],
+                Expanded(
+                  flex: 3,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Consumer(builder: (_, ref, __) {
+                          List<BaseFormError> errors =
+                              ref.watch(widget.provider).data.errors;
+                          int errorIndex = errors.indexWhere((error) =>
+                              error.field == UserFieldType.email.field);
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTextField(
+                                controller: _userNameController,
+                                inputType: TextInputType.emailAddress,
+                                label: 'email'.tr(),
+                                prefix: Icon(
+                                  Icons.person,
+                                  color: AppColors.white,
+                                ),
+                                errorText: (errorIndex != -1) ? "" : null,
+                              ).paddingBottom(0),
+                              (errorIndex != -1)
+                                  ? AppTextFieldErrorText(
+                                      errorText:
+                                          errors[errorIndex].message ?? "",
+                                    )
+                                  : const SizedBox()
+                            ],
+                          ).paddingBottom(10);
+                        }),
+                        Consumer(builder: (_, ref, __) {
+                          bool showPassword = ref.watch(_showPasswordProvider);
+                          List<BaseFormError> errors =
+                              ref.watch(widget.provider).data.errors;
+                          int errorIndex = errors.indexWhere((error) =>
+                              error.field == UserFieldType.password.field);
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTextField(
+                                controller: _passwordController,
+                                label: 'Password'.tr(),
+                                prefix: Icon(
+                                  Icons.key,
+                                  color: AppColors.white,
+                                ),
+                                suffix: !showPassword
+                                    ? InkWell(
+                                        onTap: () {
+                                          ref
+                                              .watch(_showPasswordProvider
+                                                  .notifier)
+                                              .state = true;
+                                        },
+                                        child: Icon(
+                                          Icons.remove_red_eye,
+                                          color: AppColors.white,
+                                        ))
+                                    : InkWell(
+                                        onTap: () {
+                                          ref
+                                              .watch(_showPasswordProvider
+                                                  .notifier)
+                                              .state = false;
+                                        },
+                                        child: Icon(
+                                          Icons.remove_red_eye_outlined,
+                                          color: AppColors.white,
+                                        )),
+                                isSecured: !showPassword,
+                                errorText: (errorIndex != -1) ? "" : null,
+                              ).paddingBottom(0),
+                              (errorIndex != -1)
+                                  ? AppTextFieldErrorText(
+                                      errorText:
+                                          errors[errorIndex].message ?? "",
+                                    )
+                                  : const SizedBox()
+                            ],
+                          ).paddingBottom(10);
+                        }),
+                        Consumer(builder: (_, ref, __) {
+                          bool showPassword = ref.watch(_showPasswordProvider);
+                          List<BaseFormError> errors =
+                              ref.watch(widget.provider).data.errors;
+                          int errorIndex = errors.indexWhere((error) =>
+                              error.field ==
+                              UserFieldType.confirmPassword.field);
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTextField(
+                                controller: _confirmPasswordController,
+                                label: 'confirm_password'.tr(),
+                                prefix: Icon(
+                                  Icons.key,
+                                  color: AppColors.white,
+                                ),
+                                suffix: !showPassword
+                                    ? InkWell(
+                                        onTap: () {
+                                          ref
+                                              .watch(_showPasswordProvider
+                                                  .notifier)
+                                              .state = true;
+                                        },
+                                        child: Icon(
+                                          Icons.remove_red_eye,
+                                          color: AppColors.white,
+                                        ))
+                                    : InkWell(
+                                        onTap: () {
+                                          ref
+                                              .watch(_showPasswordProvider
+                                                  .notifier)
+                                              .state = false;
+                                        },
+                                        child: Icon(
+                                          Icons.remove_red_eye_outlined,
+                                          color: AppColors.white,
+                                        )),
+                                isSecured: !showPassword,
+                                errorText: (errorIndex != -1) ? "" : null,
+                              ).paddingBottom(0),
+                              (errorIndex != -1)
+                                  ? AppTextFieldErrorText(
+                                      errorText:
+                                          errors[errorIndex].message ?? "",
+                                    )
+                                  : const SizedBox()
+                            ],
+                          ).paddingBottom(10);
+                        }),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),

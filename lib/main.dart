@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:my_fit_squad/app_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,4 +24,9 @@ void main() async {
         fallbackLocale: AppLocales.english.locale,
         child: MyFitSquad()),
   ));
+  WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    if (Platform.isAndroid) {
+      await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+    }
+  });
 }

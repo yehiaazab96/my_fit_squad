@@ -42,126 +42,131 @@ class _JoinUsInfoState extends State<JoinUsInfo>
         Expanded(
             child: AppCard(
           color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                'Fill your personal data \n to Proceed',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () async {
-                      final ImagePicker picker = ImagePicker();
-                      final XFile? image =
-                          await picker.pickImage(source: ImageSource.gallery);
-                      final bytes = await image?.readAsBytes();
-                      if (bytes != null) {
-                        setState(() {
-                          _imageFile = image;
-                          _profileImage = MemoryImage(bytes);
-                        });
-                      }
-                    },
-                    child: CircleAvatar(
-                      minRadius: 15.w,
-                      maxRadius: 15.w,
-                      backgroundColor:
-                          Theme.of(context).colorScheme.onSecondary,
-                      backgroundImage: _profileImage,
-                      child: _profileImage == null
-                          ? Icon(
-                              Icons.add_a_photo_outlined,
-                              size: 4.h,
-                            )
-                          : null,
-                    ).paddingBottom(4.h),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        child: Consumer(builder: (_, ref, __) {
-                          List<BaseFormError> errors =
-                              ref.watch(widget.provider).data.errors;
-                          int errorIndex = errors.indexWhere((error) =>
-                              error.field == UserFieldType.firstName.field);
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AppTextField(
-                                controller: _firstNameController,
-                                inputType: TextInputType.text,
-                                label: 'first_name'.tr(),
-                                errorText: (errorIndex != -1) ? "" : null,
-                              ).paddingBottom(0),
-                              (errorIndex != -1)
-                                  ? AppTextFieldErrorText(
-                                      errorText:
-                                          errors[errorIndex].message ?? "",
-                                    )
-                                  : const SizedBox()
-                            ],
-                          );
-                        }),
-                      ),
-                      SizedBox(
-                        width: 2.w,
-                      ),
-                      Expanded(
-                        child: Consumer(builder: (_, ref, __) {
-                          List<BaseFormError> errors =
-                              ref.watch(widget.provider).data.errors;
-                          int errorIndex = errors.indexWhere((error) =>
-                              error.field == UserFieldType.lastName.field);
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AppTextField(
-                                controller: _lastNameController,
-                                inputType: TextInputType.text,
-                                label: 'last_name'.tr(),
-                                errorText: (errorIndex != -1) ? "" : null,
-                              ).paddingBottom(0),
-                              (errorIndex != -1)
-                                  ? AppTextFieldErrorText(
-                                      errorText:
-                                          errors[errorIndex].message ?? "",
-                                    )
-                                  : const SizedBox()
-                            ],
-                          );
-                        }),
-                      ),
-                    ],
-                  ).paddingBottom(10),
-                  Consumer(builder: (_, ref, __) {
-                    List<BaseFormError> errors =
-                        ref.watch(widget.provider).data.errors;
-                    int errorIndex = errors.indexWhere(
-                        (error) => error.field == UserFieldType.age.field);
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AppTextField(
-                          controller: _ageController,
-                          inputType: TextInputType.number,
-                          label: 'age'.tr(),
-                          errorText: (errorIndex != -1) ? "" : null,
-                        ).paddingBottom(0),
-                        (errorIndex != -1)
-                            ? AppTextFieldErrorText(
-                                errorText: errors[errorIndex].message ?? "",
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'Fill your personal data \n to Proceed',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ).paddingTop(3.h),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        final ImagePicker picker = ImagePicker();
+                        final XFile? image =
+                            await picker.pickImage(source: ImageSource.gallery);
+                        final bytes = await image?.readAsBytes();
+                        if (bytes != null) {
+                          setState(() {
+                            _imageFile = image;
+                            _profileImage = MemoryImage(bytes);
+                          });
+                        }
+                      },
+                      child: CircleAvatar(
+                        minRadius: 15.w,
+                        maxRadius: 15.w,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.onSecondary,
+                        backgroundImage: _profileImage,
+                        child: _profileImage == null
+                            ? Icon(
+                                Icons.add_a_photo_outlined,
+                                size: 4.h,
                               )
-                            : const SizedBox()
+                            : null,
+                      ).paddingBottom(4.h),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: Consumer(builder: (_, ref, __) {
+                            List<BaseFormError> errors =
+                                ref.watch(widget.provider).data.errors;
+                            int errorIndex = errors.indexWhere((error) =>
+                                error.field == UserFieldType.firstName.field);
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AppTextField(
+                                  controller: _firstNameController,
+                                  inputType: TextInputType.text,
+                                  label: 'first_name'.tr(),
+                                  errorText: (errorIndex != -1) ? "" : null,
+                                ).paddingBottom(0),
+                                (errorIndex != -1)
+                                    ? AppTextFieldErrorText(
+                                        errorText:
+                                            errors[errorIndex].message ?? "",
+                                      )
+                                    : const SizedBox()
+                              ],
+                            );
+                          }),
+                        ),
+                        SizedBox(
+                          width: 2.w,
+                        ),
+                        Expanded(
+                          child: Consumer(builder: (_, ref, __) {
+                            List<BaseFormError> errors =
+                                ref.watch(widget.provider).data.errors;
+                            int errorIndex = errors.indexWhere((error) =>
+                                error.field == UserFieldType.lastName.field);
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AppTextField(
+                                  controller: _lastNameController,
+                                  inputType: TextInputType.text,
+                                  label: 'last_name'.tr(),
+                                  errorText: (errorIndex != -1) ? "" : null,
+                                ).paddingBottom(0),
+                                (errorIndex != -1)
+                                    ? AppTextFieldErrorText(
+                                        errorText:
+                                            errors[errorIndex].message ?? "",
+                                      )
+                                    : const SizedBox()
+                              ],
+                            );
+                          }),
+                        ),
                       ],
-                    ).paddingBottom(10);
-                  }),
-                ],
-              )
-            ],
+                    ).paddingBottom(10),
+                    Consumer(builder: (_, ref, __) {
+                      List<BaseFormError> errors =
+                          ref.watch(widget.provider).data.errors;
+                      int errorIndex = errors.indexWhere(
+                          (error) => error.field == UserFieldType.age.field);
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppTextField(
+                            controller: _ageController,
+                            inputType: TextInputType.number,
+                            label: 'age'.tr(),
+                            errorText: (errorIndex != -1) ? "" : null,
+                          ).paddingBottom(0),
+                          (errorIndex != -1)
+                              ? AppTextFieldErrorText(
+                                  errorText: errors[errorIndex].message ?? "",
+                                )
+                              : const SizedBox()
+                        ],
+                      ).paddingBottom(10);
+                    }),
+                  ],
+                )
+              ],
+            ),
           ),
         )),
         Container(

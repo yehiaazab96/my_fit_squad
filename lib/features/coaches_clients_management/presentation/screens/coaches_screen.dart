@@ -65,6 +65,7 @@ class _CoachesScreenState extends State<CoachesScreen> {
                                       child: ClipOval(
                                         child: SizedBox(
                                           width: 10.h,
+                                          height: 10.h,
                                           child: AppNetworkImage(
                                             hasToken: true,
                                             url: e.profileImage ?? '',

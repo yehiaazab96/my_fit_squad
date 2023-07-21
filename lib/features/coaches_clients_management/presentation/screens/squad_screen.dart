@@ -78,7 +78,7 @@ class _SquadScreenState extends State<SquadScreen> with BaseViewModel {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 0.h,
-                          childAspectRatio: 0.9,
+                          childAspectRatio: 1,
                           mainAxisSpacing: 0.h),
                       children: coaches.map((coach) {
                         return AppCard(
@@ -109,6 +109,7 @@ class _SquadScreenState extends State<SquadScreen> with BaseViewModel {
                                         child: ClipOval(
                                           child: SizedBox(
                                             width: 10.h,
+                                            height: 10.h,
                                             child: AppNetworkImage(
                                               hasToken: true,
                                               url: coach.profileImage ?? '',
@@ -199,6 +200,7 @@ class _SquadScreenState extends State<SquadScreen> with BaseViewModel {
                                                 child: ClipOval(
                                                   child: SizedBox(
                                                     width: 10.h,
+                                                    height: 10.h,
                                                     child: AppNetworkImage(
                                                       hasToken: true,
                                                       url:

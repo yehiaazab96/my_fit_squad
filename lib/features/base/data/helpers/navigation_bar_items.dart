@@ -92,18 +92,22 @@ enum NavigationBarItem {
         return Consumer(builder: (_, ref, __) {
           var currentScreen = ref.watch(workoutScreenViewModelProvider).screen;
 
-          return currentScreen == WorkoutScreenType.other
-              ? InkWell(
-                  onTap: () {
-                    ref.watch(workoutScreenViewModelProvider.notifier).pop();
-                  },
-                  child: const Icon(
-                    Icons.arrow_back_ios,
-                  ),
-                )
-              : AppLogo(
-                  margin: EdgeInsetsDirectional.only(start: 3.w, bottom: 1.h),
-                );
+          return
+
+              // currentScreen == WorkoutScreenType.other
+              //     ? InkWell(
+              //         onTap: () {
+              //           ref.watch(workoutScreenViewModelProvider.notifier).pop();
+              //         },
+              //         child: const Icon(
+              //           Icons.arrow_back_ios,
+              //         ),
+              //       )
+              //     :
+
+              AppLogo(
+            margin: EdgeInsetsDirectional.only(start: 3.w, bottom: 1.h),
+          );
         });
 
       default:
