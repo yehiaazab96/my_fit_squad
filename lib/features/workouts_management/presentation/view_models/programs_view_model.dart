@@ -33,7 +33,9 @@ class ProgramsViewModel extends StateNotifier<BaseState<ProgramsState>>
         handleError(errorType: result.errorType ?? ApiErrorType.generalError);
       }
     }
-    state = state.copyWith(isLoading: false);
+
+    state = state.copyWith(
+        isLoading: false, hasNoData: state.data.programs.isEmpty);
     return null;
   }
 

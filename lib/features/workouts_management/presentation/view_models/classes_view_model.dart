@@ -33,7 +33,9 @@ class ClassesViewModel extends StateNotifier<BaseState<ClassesState>>
         handleError(errorType: result.errorType ?? ApiErrorType.generalError);
       }
     }
-    state = state.copyWith(isLoading: false);
+
+    state =
+        state.copyWith(isLoading: false, hasNoData: state.data.classes.isEmpty);
     return null;
   }
 

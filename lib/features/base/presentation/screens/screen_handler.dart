@@ -54,7 +54,7 @@ class ScreenHandlerState extends State<ScreenHandler> with BaseViewModel {
   });
 
   late final Provider<bool> _noDataProvider = Provider<bool>((ref) {
-    return ref.watch(widget.screenProvider).hasNoData;
+    return (ref.watch(widget.screenProvider).hasNoData);
   });
 
   late final Provider<bool> _isPerformingRequestProvider =
@@ -91,6 +91,8 @@ class ScreenHandlerState extends State<ScreenHandler> with BaseViewModel {
         Consumer(
           builder: (_, ref, __) {
             final bool noData = ref.watch(_noDataProvider);
+            print(noData);
+            print('this is the noData');
             return noData
                 ? AppNoData(
                     message: widget.noDataMessage, icon: widget.noDataIcon)

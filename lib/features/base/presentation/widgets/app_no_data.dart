@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:my_fit_squad/gen/assets.gen.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class AppNoData extends StatelessWidget {
   final IconData? icon;
@@ -20,7 +22,7 @@ class AppNoData extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             icon == null
-                ? const SizedBox()
+                ? Assets.images.logo.image(width: 10.h, height: 10.h)
                 : Icon(
                     icon,
                     size: 100,
@@ -30,6 +32,7 @@ class AppNoData extends StatelessWidget {
               child: Text(
                 message ?? "noData".tr(),
                 textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
           ],

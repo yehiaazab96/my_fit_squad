@@ -18,12 +18,16 @@ class WorkoutsViewModel extends StateNotifier<BaseState<WorkoutsState>>
   getWorkouts({WorkoutCategory? category}) async {
     hideKeyboard();
 
-    state = state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true, hasNoData: false);
     BaseApiResult<List<Workout>> result =
         await _workoutsRepositoryImpl.getWorkouts(category: category);
     if (result.data != null) {
       print(result.data);
-      state = state.copyWith(data: state.data.copyWith(workouts: result.data));
+
+      state = state.copyWith(
+          data: state.data.copyWith(
+        workouts: result.data,
+      ));
     } else {
       if (result.apiErrors != null) {
         showToastMessage(result.errorMessage ?? "Something went wrong");
@@ -31,7 +35,8 @@ class WorkoutsViewModel extends StateNotifier<BaseState<WorkoutsState>>
         handleError(errorType: result.errorType ?? ApiErrorType.generalError);
       }
     }
-    state = state.copyWith(isLoading: false);
+    state = state.copyWith(
+        isLoading: false, hasNoData: state.data.workouts.isEmpty);
   }
 
   addWorkoutToList(Workout workout) {

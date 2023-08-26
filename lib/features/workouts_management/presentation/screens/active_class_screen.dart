@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:my_fit_squad/common/extensions/widget_extensions.dart';
 import 'package:my_fit_squad/features/workouts_management/data/model/class.dart';
+import 'package:my_fit_squad/features/workouts_management/presentation/screens/workout_details_modal.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/screens/workout_details_screen.dart';
 import 'package:my_fit_squad/features/workouts_management/presentation/widgets/app_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -105,11 +106,12 @@ class _ActiveClassScreenState extends State<ActiveClassScreen> {
                       : ElevatedButton.icon(
                           onPressed: () {
                             setState(() {
-                              restTime = widget
-                                      .activeClass
-                                      .classWorkouts?[currentWorkout]
-                                      .restTime ??
-                                  0;
+                              // restTime = widget
+                              //         .activeClass
+                              //         .classWorkouts?[currentWorkout]
+                              //         .restTime ??
+                              //     0;
+                              restTime = 3;
                               inRestTime = true;
 
                               Future.delayed(restTime.seconds, () {
@@ -141,7 +143,7 @@ class _ActiveClassScreenState extends State<ActiveClassScreen> {
                           icon: Icon(Icons.navigate_next_rounded),
                           label: Text('Next Set')),
                 ).paddingVertical(2.h),
-                WorkoutDetailsScreen(
+                WorkoutDetailsModal(
                   workout:
                       widget.activeClass.classWorkouts?[currentWorkout].workout,
                 )
