@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:health/health.dart';
+// import 'package:health/health.dart';
 import 'package:my_fit_squad/common/extensions/widget_extensions.dart';
 import 'package:my_fit_squad/common/injection/injection_container.dart';
 import 'package:my_fit_squad/common/utils/health_info.dart';
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               }),
-              CoolHealthDataWidget(),
+              // CoolHealthDataWidget(),
               Consumer(builder: (_, ref, __) {
                 var notifer = ref.watch(categoriesViewModelProvider.notifier);
                 var categories =
@@ -155,195 +155,195 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class CoolHealthDataWidget extends StatefulWidget {
-  CoolHealthDataWidget();
+// class CoolHealthDataWidget extends StatefulWidget {
+//   CoolHealthDataWidget();
 
-  @override
-  State<CoolHealthDataWidget> createState() => _CoolHealthDataWidgetState();
-}
+//   @override
+//   State<CoolHealthDataWidget> createState() => _CoolHealthDataWidgetState();
+// }
 
-class _CoolHealthDataWidgetState extends State<CoolHealthDataWidget> {
-  List<HealthDataPoint> healthList = [];
+// class _CoolHealthDataWidgetState extends State<CoolHealthDataWidget> {
+//   List<HealthDataPoint> healthList = [];
 
-  Future getHealthData() async {
-    healthList = await HealthInfo.getHeatldataforDuartion(
-        duartion: Duration(days: 10.days.inDays),
-        dataTypes: [
-          HealthDataType.STEPS,
-          HealthDataType.BASAL_ENERGY_BURNED,
-          HealthDataType.ACTIVE_ENERGY_BURNED,
-          HealthDataType.DISTANCE_WALKING_RUNNING,
-          HealthDataType.HEART_RATE
-        ]);
+//   Future getHealthData() async {
+//     healthList = await HealthInfo.getHeatldataforDuartion(
+//         duartion: Duration(days: 10.days.inDays),
+//         dataTypes: [
+//           HealthDataType.STEPS,
+//           HealthDataType.BASAL_ENERGY_BURNED,
+//           HealthDataType.ACTIVE_ENERGY_BURNED,
+//           HealthDataType.DISTANCE_WALKING_RUNNING,
+//           HealthDataType.HEART_RATE
+//         ]);
 
-    return healthList;
-  }
+//     return healthList;
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    var steps = 0;
-    var healthRate = 0;
-    var distance = 0;
-    var calories = 0;
-    print(healthList);
-    if (healthList.isNotEmpty) {
-      if (healthList
-          .where((element) => element.type == HealthDataType.STEPS)
-          .isNotEmpty) {
-        steps = double.parse(healthList
-                .firstWhere((element) => element.type == HealthDataType.STEPS)
-                .value
-                .toString())
-            .toInt();
-        print(steps);
-      }
-      if (healthList
-          .where((element) =>
-              element.type == HealthDataType.DISTANCE_WALKING_RUNNING)
-          .isNotEmpty) {
-        distance = double.parse(healthList
-                .firstWhere((element) =>
-                    element.type == HealthDataType.DISTANCE_WALKING_RUNNING)
-                .value
-                .toString())
-            .toInt();
-        print(distance);
-      }
-      if (healthList
-          .where(
-              (element) => element.type == HealthDataType.ACTIVE_ENERGY_BURNED)
-          .isNotEmpty) {
-        calories = double.parse(healthList
-                .firstWhere((element) =>
-                    element.type == HealthDataType.ACTIVE_ENERGY_BURNED)
-                .value
-                .toString())
-            .toInt();
-        print(calories);
-      }
-      if (healthList
-          .where((element) => element.type == HealthDataType.HEART_RATE)
-          .isNotEmpty) {
-        healthRate = double.parse(healthList
-                .firstWhere(
-                    (element) => element.type == HealthDataType.HEART_RATE)
-                .value
-                .toString())
-            .toInt();
-        print(healthRate);
-      }
+//   @override
+//   Widget build(BuildContext context) {
+//     var steps = 0;
+//     var healthRate = 0;
+//     var distance = 0;
+//     var calories = 0;
+//     print(healthList);
+//     if (healthList.isNotEmpty) {
+//       if (healthList
+//           .where((element) => element.type == HealthDataType.STEPS)
+//           .isNotEmpty) {
+//         steps = double.parse(healthList
+//                 .firstWhere((element) => element.type == HealthDataType.STEPS)
+//                 .value
+//                 .toString())
+//             .toInt();
+//         print(steps);
+//       }
+//       if (healthList
+//           .where((element) =>
+//               element.type == HealthDataType.DISTANCE_WALKING_RUNNING)
+//           .isNotEmpty) {
+//         distance = double.parse(healthList
+//                 .firstWhere((element) =>
+//                     element.type == HealthDataType.DISTANCE_WALKING_RUNNING)
+//                 .value
+//                 .toString())
+//             .toInt();
+//         print(distance);
+//       }
+//       if (healthList
+//           .where(
+//               (element) => element.type == HealthDataType.ACTIVE_ENERGY_BURNED)
+//           .isNotEmpty) {
+//         calories = double.parse(healthList
+//                 .firstWhere((element) =>
+//                     element.type == HealthDataType.ACTIVE_ENERGY_BURNED)
+//                 .value
+//                 .toString())
+//             .toInt();
+//         print(calories);
+//       }
+//       if (healthList
+//           .where((element) => element.type == HealthDataType.HEART_RATE)
+//           .isNotEmpty) {
+//         healthRate = double.parse(healthList
+//                 .firstWhere(
+//                     (element) => element.type == HealthDataType.HEART_RATE)
+//                 .value
+//                 .toString())
+//             .toInt();
+//         print(healthRate);
+//       }
 
-      // calories = double.parse(healthList
-      //         .firstWhere((element) =>
-      //             element.type == HealthDataType.ACTIVE_ENERGY_BURNED)
-      //         .value
-      //         .toString())
-      //     .toInt();
-      // print(calories);
-    }
+//       // calories = double.parse(healthList
+//       //         .firstWhere((element) =>
+//       //             element.type == HealthDataType.ACTIVE_ENERGY_BURNED)
+//       //         .value
+//       //         .toString())
+//       //     .toInt();
+//       // print(calories);
+//     }
 
-    return AppCard(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(16.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.transparent,
-              blurRadius: 6.0,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Health Data',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton.icon(
-                    onPressed: () {
-                      getHealthData().then((value) {
-                        setState(() {});
-                      });
-                    },
-                    icon: Icon(Icons.refresh),
-                    label: Text('Refresh'))
-              ],
-            ),
-            SizedBox(height: 16.0),
-            if (healthList.isNotEmpty)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: _buildDataRow(
-                        Icons.directions_walk, 'Step Count', '${steps}'),
-                  ),
-                  Expanded(
-                      child: _buildDataRow(
-                          Icons.favorite, 'Heart Rate', '${healthRate} bpm')),
-                ],
-              ),
-            if (healthList.isNotEmpty)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: _buildDataRow(
-                        Icons.whatshot, 'Calories Burned', '${calories} kcal'),
-                  ),
-                  Expanded(
-                      child: _buildDataRow(
-                          Icons.whatshot, 'Distance', '${distance} meters')),
-                ],
-              ),
-          ],
-        ),
-      ),
-    );
-  }
+//     return AppCard(
+//       child: Container(
+//         decoration: BoxDecoration(
+//           color: Colors.transparent,
+//           borderRadius: BorderRadius.circular(16.0),
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.transparent,
+//               blurRadius: 6.0,
+//               offset: Offset(0, 4),
+//             ),
+//           ],
+//         ),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                 Text(
+//                   'Health Data',
+//                   style: TextStyle(
+//                     color: Colors.white,
+//                     fontSize: 24.0,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//                 TextButton.icon(
+//                     onPressed: () {
+//                       getHealthData().then((value) {
+//                         setState(() {});
+//                       });
+//                     },
+//                     icon: Icon(Icons.refresh),
+//                     label: Text('Refresh'))
+//               ],
+//             ),
+//             SizedBox(height: 16.0),
+//             if (healthList.isNotEmpty)
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Expanded(
+//                     child: _buildDataRow(
+//                         Icons.directions_walk, 'Step Count', '${steps}'),
+//                   ),
+//                   Expanded(
+//                       child: _buildDataRow(
+//                           Icons.favorite, 'Heart Rate', '${healthRate} bpm')),
+//                 ],
+//               ),
+//             if (healthList.isNotEmpty)
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Expanded(
+//                     child: _buildDataRow(
+//                         Icons.whatshot, 'Calories Burned', '${calories} kcal'),
+//                   ),
+//                   Expanded(
+//                       child: _buildDataRow(
+//                           Icons.whatshot, 'Distance', '${distance} meters')),
+//                 ],
+//               ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
 
-  Widget _buildDataRow(IconData icon, String title, String value) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(
-          icon,
-          color: Colors.white,
-          size: 30.0,
-        ),
-        SizedBox(width: 8.0),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16.0,
-              ),
-            ),
-            SizedBox(height: 4.0),
-            Text(
-              value,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
+//   Widget _buildDataRow(IconData icon, String title, String value) {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.start,
+//       children: [
+//         Icon(
+//           icon,
+//           color: Colors.white,
+//           size: 30.0,
+//         ),
+//         SizedBox(width: 8.0),
+//         Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text(
+//               title,
+//               style: TextStyle(
+//                 color: Colors.white,
+//                 fontSize: 16.0,
+//               ),
+//             ),
+//             SizedBox(height: 4.0),
+//             Text(
+//               value,
+//               style: TextStyle(
+//                 color: Colors.white,
+//                 fontSize: 20.0,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//           ],
+//         ),
+//       ],
+//     );
+//   }
+// }

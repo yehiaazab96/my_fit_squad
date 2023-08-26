@@ -106,12 +106,12 @@ class _ActiveClassScreenState extends State<ActiveClassScreen> {
                       : ElevatedButton.icon(
                           onPressed: () {
                             setState(() {
-                              // restTime = widget
-                              //         .activeClass
-                              //         .classWorkouts?[currentWorkout]
-                              //         .restTime ??
-                              //     0;
-                              restTime = 3;
+                              restTime = widget
+                                      .activeClass
+                                      .classWorkouts?[currentWorkout]
+                                      .restTime ??
+                                  0;
+                              // restTime = 3;
                               inRestTime = true;
 
                               Future.delayed(restTime.seconds, () {
@@ -131,10 +131,12 @@ class _ActiveClassScreenState extends State<ActiveClassScreen> {
                               });
                             });
                             Timer.periodic(1.seconds, (Timer t) {
+                              print('aho');
                               setState(() {
                                 if (restTime > 0) {
                                   restTime--;
                                 } else {
+                                  inRestTime = false;
                                   t.cancel();
                                 }
                               });

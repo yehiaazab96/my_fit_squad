@@ -112,48 +112,8 @@ class _CoachesScreenState extends State<CoachesScreen> {
                                               ?.requestPending ??
                                           false);
 
-                                      return !requestPending
-                                          ? Expanded(
-                                              child: ElevatedButton(
-                                                  onPressed: () {
-                                                    ref
-                                                        .watch(
-                                                            clientsViewModelProvider
-                                                                .notifier)
-                                                        .requestToJoinSquad(
-                                                            coachID: e.userId,
-                                                            status:
-                                                                !(requestPending),
-                                                            onreturn: () {
-                                                              setState(() {});
-                                                            });
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                      backgroundColor:
-                                                          (requestPending)
-                                                              ? Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .onTertiary
-                                                              : Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .secondary),
-                                                  child: Text(
-                                                          (requestPending)
-                                                              ? 'Cancel'
-                                                              : 'Join',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .titleMedium)
-                                                      .paddingVertical(0.5.h)),
-                                            )
-                                          : (e.joinRequests != null &&
-                                                  e.joinRequests!
-                                                      .contains(user?.userId))
+                                      return user?.role == 'client'
+                                          ? !requestPending
                                               ? Expanded(
                                                   child: ElevatedButton(
                                                       onPressed: () {
@@ -195,7 +155,53 @@ class _CoachesScreenState extends State<CoachesScreen> {
                                                           .paddingVertical(
                                                               0.5.h)),
                                                 )
-                                              : SizedBox();
+                                              : (e.joinRequests != null &&
+                                                      e.joinRequests!.contains(
+                                                          user?.userId))
+                                                  ? Expanded(
+                                                      child: ElevatedButton(
+                                                          onPressed: () {
+                                                            ref
+                                                                .watch(
+                                                                    clientsViewModelProvider
+                                                                        .notifier)
+                                                                .requestToJoinSquad(
+                                                                    coachID: e
+                                                                        .userId,
+                                                                    status:
+                                                                        !(requestPending),
+                                                                    onreturn:
+                                                                        () {
+                                                                      setState(
+                                                                          () {});
+                                                                    });
+                                                          },
+                                                          style: ElevatedButton.styleFrom(
+                                                              backgroundColor: (requestPending)
+                                                                  ? Theme.of(
+                                                                          context)
+                                                                      .colorScheme
+                                                                      .onTertiary
+                                                                  : Theme.of(
+                                                                          context)
+                                                                      .colorScheme
+                                                                      .secondary),
+                                                          child: Text(
+                                                                  (requestPending)
+                                                                      ? 'Cancel'
+                                                                      : 'Join',
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .titleMedium)
+                                                              .paddingVertical(
+                                                                  0.5.h)),
+                                                    )
+                                                  : SizedBox()
+                                          : SizedBox();
                                     })
                                   ],
                                 ),

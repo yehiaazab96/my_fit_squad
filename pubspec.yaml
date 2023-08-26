@@ -49,14 +49,12 @@ dependencies:
   flutter_animate: ^4.1.1+1
   google_fonts: ^5.0.0
   image_picker: ^0.8.9
-  health:
+  # health:
   calendar_timeline: ^1.1.2
   flutter_rating_bar: ^4.0.1
   # chewie:
   video_player:
   flutter_windowmanager: ^0.2.0
-
-
 
 dev_dependencies:
   flutter_test:
